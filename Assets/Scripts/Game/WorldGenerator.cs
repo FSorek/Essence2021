@@ -21,11 +21,11 @@ public class WorldGenerator : MonoBehaviour
 
     private void Start()
     {
-        AlignWorldSpawnedSegments();
-        PrespawnSegments();
+        AlignPrepawnedSegments();
+        SpawnSegments();
     }
 
-    private void PrespawnSegments()
+    private void SpawnSegments()
     {
         if (segments.Count >= startingSegmentCount) 
             return;
@@ -35,7 +35,7 @@ public class WorldGenerator : MonoBehaviour
             CreateSegment();
     }
 
-    private void AlignWorldSpawnedSegments()
+    private void AlignPrepawnedSegments()
     {
         for (int i = 0; i < segments.Count; i++)
         {
