@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 83083732369a2fd4ebd09e7440057fa1
   m_SerializeEntries:
   - m_GUID: 23e3abadc0aca2242b70700d1d5f0d96
-    m_Address: Assets/Prefabs/WolrdSegment.prefab
+    m_Address: Assets/Prefabs/WorldSegment.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
