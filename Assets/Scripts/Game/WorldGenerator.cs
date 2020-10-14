@@ -1,93 +1,62 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class WorldGenerator : MonoBehaviour
+public class WorldGenerator
 {
-    public WorldSegment CurrentViewingSegment => segments[playerSegmentIndex];
-    
-    [SerializeField][Min(3)] private int startingSegmentCount = 3;
-    [SerializeField] private WorldSegment segmentPrefab;
-    private ObservableCollection<WorldSegment> segments;
-    private int playerSegmentIndex;
-    private Transform player;
-    private float percentagePositionOnSegment;
+    public List<WorldSegment> Segments => segments;
+    public float MapLength => segments.Sum(segment => segment.Length);
+    private List<WorldSegment> segments = new List<WorldSegment>();
 
-    private void Awake()
+    public WorldSegment CreateSegment(WorldSegment prefab)
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
-        var preSpawnedSegments = FindObjectsOfType<WorldSegment>();
-        segments = new ObservableCollection<WorldSegment>(preSpawnedSegments);
-    }
-
-    private void Start()
-    {
-        AlignWorldSpawnedSegments();
-        SpawnSegments();
-        playerSegmentIndex = 0;
-    }
-
-    private void Update()
-    {
-        if (playerSegmentIndex == segments.Count - 1)
-            MoveFirstSegmentToLast();
-        else if(playerSegmentIndex == 0)
-            MoveLastSegmentToFirst();
-        
-        percentagePositionOnSegment = 1 - player.InverseTransformPoint(CurrentViewingSegment.transform.position).x / CurrentViewingSegment.Length;
-        if (percentagePositionOnSegment > 1.1f)
-            playerSegmentIndex++;
-        else if (percentagePositionOnSegment < -.1f)
-            playerSegmentIndex--;
-
-    }
-
-    private void AlignWorldSpawnedSegments()
-    {
-        for (int i = 0; i < segments.Count; i++)
-        {
-            var segment = segments[i];
-            if(i + 1 < segments.Count)
-                segments[i+1].AnchorLeft(segment);
-        }
-    }
-
-    private void SpawnSegments()
-    {
-        if (segments.Count >= startingSegmentCount) 
-            return;
-        
-        int segmentsToAdd = startingSegmentCount - segments.Count;
-        for (int i = 0; i < segmentsToAdd; i++)
-            CreateSegment();
-    }
-
-    private void CreateSegment()
-    {
-        var newSegment = Instantiate(segmentPrefab);
+        var newSegment = Object.Instantiate(prefab);
         var lastSegment = segments.LastOrDefault();
         if(lastSegment != null)
             newSegment.AnchorRight(lastSegment);
         
         segments.Add(newSegment);
+        return newSegment;
     }
 
-    private void MoveFirstSegmentToLast()
+    public float GetRemainingSegmentsLength(WorldSegment segment)
     {
-        var firstSegment = segments.First();
-        var lastSegment = segments.Last();
-        firstSegment.AnchorRight(lastSegment);
-        segments.Move(0, segments.Count - 1);
-        playerSegmentIndex--;
+        float length = 0;
+        var currentPlayerSegment = segments.IndexOf(segment);
+        for (int i = currentPlayerSegment + 1; i < segments.Count; i++)
+        {
+            length += segments[i].Length;
+        }
+
+        return length;
     }
 
-    private void MoveLastSegmentToFirst()
+    public WorldSegment GetPreviousSegment(WorldSegment segment)
     {
-        var firstSegment = segments.First();
-        var lastSegment = segments.Last();
-        lastSegment.AnchorLeft(firstSegment);
-        segments.Move(segments.Count - 1, 0);
-        playerSegmentIndex++;
+        var previousIndex = segments.IndexOf(segment) - 1;
+        if (previousIndex < 0)
+            return segments.Last();
+        return segments[previousIndex];
+    }
+
+    public WorldSegment GetNextSegment(WorldSegment segment)
+    {
+        var nextIndex = segments.IndexOf(segment) + 1;
+        if (nextIndex >= segments.Count)
+            return segments.First();
+        return segments[nextIndex];
+    }
+
+    public WorldSegment GetSegmentAt(float positionX)
+    {
+        foreach (var segment in segments)
+        {
+            var segmentPosX = segment.transform.position.x;
+            if (positionX < segmentPosX && positionX > segmentPosX - segment.Length)
+                return segment;
+        }
+
+        return null;
     }
 }

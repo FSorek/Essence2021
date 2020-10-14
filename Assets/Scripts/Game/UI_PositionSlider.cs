@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class UI_PositionSlider : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    [SerializeField] private WorldPosition trackedObject;
     private WorldGenerator worldGenerator;
     private Slider slider;
     
     private void Start()
     {
-        worldGenerator = FindObjectOfType<WorldGenerator>();
+        worldGenerator = WorldSettings.WorldGenerator;
         slider = GetComponent<Slider>();
     }
 
     private void Update()
     {
-        slider.value = 1 - player.InverseTransformPoint(worldGenerator.CurrentViewingSegment.transform.position).x / worldGenerator.CurrentViewingSegment.Length;
+        slider.value = trackedObject.GlobalPosition / worldGenerator.MapLength;
     }
 }
