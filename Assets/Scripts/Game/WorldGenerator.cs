@@ -5,10 +5,10 @@ using Object = UnityEngine.Object;
 
 public class WorldGenerator
 {
-    public List<WorldSegment> Segments => segments;
+    public event Action<WorldSegment> OnSegmentCreated;
     public float MapLength => segments.Sum(segment => segment.Length);
-    private List<WorldSegment> segments = new List<WorldSegment>();
-
+    private readonly List<WorldSegment> segments = new List<WorldSegment>();
+    
     public WorldSegment CreateSegment(WorldSegment prefab)
     {
         var newSegment = Object.Instantiate(prefab);
@@ -17,6 +17,7 @@ public class WorldGenerator
             newSegment.AnchorRight(lastSegment);
         
         segments.Add(newSegment);
+        OnSegmentCreated?.Invoke(newSegment);
         return newSegment;
     }
 

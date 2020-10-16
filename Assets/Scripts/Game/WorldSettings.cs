@@ -1,14 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WorldSettings : MonoBehaviour
 {
-    public static WorldGenerator WorldGenerator { get; private set; }
+    public static WorldGenerator WorldGenerator { get; } = new WorldGenerator();
     [SerializeField] private WorldSegment segmentPrefab;
     [SerializeField][Min(3)] private int startingSegments = 3;
-    private void Awake()
+    private void Start()
     {
-        if(WorldGenerator == null)
-            WorldGenerator = new WorldGenerator();
         CreateStartingSegments();
     }
 

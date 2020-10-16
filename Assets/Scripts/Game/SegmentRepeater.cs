@@ -6,13 +6,13 @@ using UnityEngine;
 public class SegmentRepeater : MonoBehaviour
 {
     [SerializeField] private WorldPosition trackedObject;
-    private ObservableCollection<WorldSegment> segments;
+    private readonly ObservableCollection<WorldSegment> segments = new ObservableCollection<WorldSegment>();
     private int currentSegmentIndex;
     private WorldGenerator worldGenerator;
     private void Start()
     {
         worldGenerator = WorldSettings.WorldGenerator;
-        segments = new ObservableCollection<WorldSegment>(worldGenerator.Segments);
+        worldGenerator.OnSegmentCreated += (segment) => segments.Add(segment);
     }
 
     private void Update()
