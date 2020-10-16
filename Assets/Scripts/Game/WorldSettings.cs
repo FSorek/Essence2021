@@ -8,6 +8,8 @@ public class WorldSettings : MonoBehaviour
     [SerializeField][Min(3)] private int startingSegments = 3;
     private void Start()
     {
+        var prespawnedSegments = FindObjectsOfType<WorldSegment>();
+        WorldGenerator.AddSegments(prespawnedSegments);
         CreateStartingSegments();
     }
 

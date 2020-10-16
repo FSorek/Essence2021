@@ -8,7 +8,15 @@ public class WorldGenerator
     public event Action<WorldSegment> OnSegmentCreated;
     public float MapLength => segments.Sum(segment => segment.Length);
     private readonly List<WorldSegment> segments = new List<WorldSegment>();
-    
+
+    public void AddSegments(IEnumerable<WorldSegment> prespawnedSegments)
+    {
+        foreach (var segment in prespawnedSegments)
+        {
+            segments.Add(segment);
+            OnSegmentCreated?.Invoke(segment);
+        }
+    }
     public WorldSegment CreateSegment(WorldSegment prefab)
     {
         var newSegment = Object.Instantiate(prefab);
