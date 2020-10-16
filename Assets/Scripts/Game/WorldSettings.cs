@@ -17,7 +17,8 @@ public class WorldSettings : MonoBehaviour
     {
         for (int i = 0; i < startingSegments; i++)
         {
-            WorldGenerator.CreateSegment(segmentPrefab);
+            var segment = WorldGenerator.CreateSegment(segmentPrefab);
+            segment.transform.SetParent(transform);
         }
     }
 }
