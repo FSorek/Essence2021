@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(WorldPosition))]
 public class MapMovement : MonoBehaviour
