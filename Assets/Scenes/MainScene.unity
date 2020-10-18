@@ -154,7 +154,7 @@ Transform:
   m_Children:
   - {fileID: 1782662968}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &164199411
 MonoBehaviour:
@@ -273,7 +273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 33.329, y: -90.425, z: -12.831}
 --- !u!1 &265806232
 GameObject:
@@ -367,7 +367,7 @@ RectTransform:
   m_Children:
   - {fileID: 2145046509}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -704,7 +704,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1565310422
 GameObject:
@@ -773,7 +773,7 @@ Transform:
   m_Children:
   - {fileID: 1714071783}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1603054944
 MonoBehaviour:
@@ -997,6 +997,131 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 469219616447941056, guid: 23e3abadc0aca2242b70700d1d5f0d96, type: 3}
   m_PrefabInstance: {fileID: 1714595862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1960501284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960501286}
+  - component: {fileID: 1960501285}
+  m_Layer: 0
+  m_Name: '[INPUT MANAGER]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960501285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960501284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1c8310c5adfe98c49ad15a081258eb2c, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a0bf3a3-d52b-4d68-9268-f8bf212907fc
+    m_ActionName: Basic Actions/Attack[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3d4f41bd-9d36-444e-baee-22e4dafa90ec
+    m_ActionName: Basic Actions/Absorb[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e429610-3516-4627-a452-a0d6e452edea
+    m_ActionName: Basic Actions/Exude[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1603054944}
+        m_TargetAssemblyTypeName: PlayerMovement, Game
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4fe40783-7355-4037-aab7-2666032042e9
+    m_ActionName: Basic Actions/Movement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eea66388-c779-4dfe-ad41-96d343f064b3
+    m_ActionName: Summoning Actions/Fire[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1466708a-fa02-4f92-ba3b-07d2363e5011
+    m_ActionName: Summoning Actions/Water[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4d8592fd-9084-4c93-9460-24ecd3543ef1
+    m_ActionName: Summoning Actions/Earth[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb43202d-14a0-49d9-97aa-a9408e1d5fbf
+    m_ActionName: Summoning Actions/Air[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f0f0126c-252a-45e5-aa7a-cb6ff8a02773
+    m_ActionName: Summoning Actions/Obelisk[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 130ec528-d77a-49ef-8ccd-66b41e6edbc1
+    m_ActionName: Summoning Actions/Movement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: df157f15-a679-4da7-a2fa-0e94d9014087
+    m_ActionName: Build Actions/Build[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a9e30f0-ab72-4a7f-aeb1-2eade5084143
+    m_ActionName: Build Actions/Cancel[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d37b348-9727-43c6-ac73-62eddc0110b6
+    m_ActionName: Build Actions/Movement[/Keyboard/a,/Keyboard/d]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Basic Actions
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1960501286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960501284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.550682, y: 51.715446, z: 61.95384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145046508
 GameObject:
   m_ObjectHideFlags: 0
