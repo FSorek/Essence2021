@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 namespace Tests
@@ -12,7 +11,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator anchoring_right_of_another_segment_sets_aligns_position_to_its_length()
         {
-            yield return LoadEmptyTestScene();
+            yield return TestHelpers.LoadEmptyTestScene();
             WorldSegment firstSegment = GetWorldSegment();
             WorldSegment secondSegment = GetWorldSegment();
             
@@ -26,7 +25,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator anchoring_left_of_another_segment_sets_aligns_position_to_another_segment_length()
         {
-            yield return LoadEmptyTestScene();
+            yield return TestHelpers.LoadEmptyTestScene();
             WorldSegment firstSegment = GetWorldSegment();
             WorldSegment secondSegment = GetWorldSegment();
             
@@ -43,15 +42,5 @@ namespace Tests
             return Object.Instantiate(prefab);
         }
         
-        public static IEnumerator LoadEmptyTestScene()
-        {
-            var operation = SceneManager.LoadSceneAsync("EmptyTestScene");
-            while (operation.isDone == false)
-                yield return null;
-                
-            var floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            floor.transform.localScale = new Vector3(50, 0.1f, 50);
-            floor.transform.position = Vector3.zero;
-        }
     }
 }

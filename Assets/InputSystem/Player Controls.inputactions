@@ -6,6 +6,14 @@
             "id": "384f91bb-e398-45fc-9f08-543b314c92f7",
             "actions": [
                 {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "4fe40783-7355-4037-aab7-2666032042e9",
+                    "expectedControlType": "Double",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "8a0bf3a3-d52b-4d68-9268-f8bf212907fc",
@@ -22,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Exude",
+                    "name": "Add Element",
                     "type": "Button",
                     "id": "7e429610-3516-4627-a452-a0d6e452edea",
                     "expectedControlType": "Button",
@@ -30,10 +38,50 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "4fe40783-7355-4037-aab7-2666032042e9",
-                    "expectedControlType": "Double",
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "45c8828e-0f6a-494d-b822-71d29bf1eddf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Obelisk",
+                    "type": "Button",
+                    "id": "452347e0-e085-4594-aeac-e3a00ca866a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Air",
+                    "type": "Button",
+                    "id": "e3ca4dda-80f2-4a36-a10c-5405c2335891",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Earth",
+                    "type": "Button",
+                    "id": "690ae6cc-3b3c-42ab-a9c8-34cbcd2e8eb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Water",
+                    "type": "Button",
+                    "id": "12f3e205-9dc7-4d38-bb4f-072a0ea8261a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "9925f374-3714-43be-8a8f-57429c3f5682",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -68,7 +116,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Exude",
+                    "action": "Add Element",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88c4bb69-66fe-40de-b851-401f0041ff14",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0da7c6e9-e584-4280-8800-2eac2b1080a0",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Water",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6023c8b5-72cc-4ecb-9b49-8306216eefd1",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Earth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3dfb74d4-3d47-440c-a3e1-3f228247443c",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Air",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fbf5993-0745-420b-9363-7e15e4745280",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Obelisk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -104,197 +207,10 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Summoning Actions",
-            "id": "b457a5a3-adcb-4b2e-b845-206f2eb68b2f",
-            "actions": [
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "eea66388-c779-4dfe-ad41-96d343f064b3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Water",
-                    "type": "Button",
-                    "id": "1466708a-fa02-4f92-ba3b-07d2363e5011",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Earth",
-                    "type": "Button",
-                    "id": "4d8592fd-9084-4c93-9460-24ecd3543ef1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Air",
-                    "type": "Button",
-                    "id": "bb43202d-14a0-49d9-97aa-a9408e1d5fbf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Obelisk",
-                    "type": "Button",
-                    "id": "f0f0126c-252a-45e5-aa7a-cb6ff8a02773",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "130ec528-d77a-49ef-8ccd-66b41e6edbc1",
-                    "expectedControlType": "Double",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "fc8c5b02-9de9-44bb-b0e3-ea9cad14c865",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1c26809c-c841-4c01-9108-c5d0fc667e86",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Water",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3620e9d2-46f3-497d-9fb7-2c57fb88fb11",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Earth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "df293f9e-9f04-4036-9f3d-08e6b9de369b",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Obelisk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2b06f37c-0bec-4466-8ee7-6289f05e7672",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Air",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "c1958d83-5efd-47d0-88c7-61b536e929c7",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "40543eeb-9fd5-4463-9b9d-e484373f7725",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "a983df0f-39e9-4ab0-ab0a-a5a25271a32d",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Build Actions",
-            "id": "95d5e94d-7ef7-4660-ab01-726cbdb33cb8",
-            "actions": [
-                {
-                    "name": "Build",
-                    "type": "Button",
-                    "id": "df157f15-a679-4da7-a2fa-0e94d9014087",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "4a9e30f0-ab72-4a7f-aeb1-2eade5084143",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "1d37b348-9727-43c6-ac73-62eddc0110b6",
-                    "expectedControlType": "Double",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "8d364942-d496-4df3-aaa9-bd89f968aa74",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Build",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3ff1cd4f-b77d-4194-b077-2018d33612a1",
+                    "id": "3bb0d1a6-45dd-4372-95b4-5adffa64da30",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
@@ -302,39 +218,6 @@
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "6da5dbb9-07c8-488e-8a5a-6dcd3ae598a7",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "f4273b49-c15f-46ee-9782-6359e294d28f",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b582ff9d-22aa-451d-88e8-e75009adbed3",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
