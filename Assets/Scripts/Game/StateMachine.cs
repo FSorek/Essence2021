@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StateMachine
 {
     public event Action<IState> OnStateChanged = delegate {  };
+    public IState CurrentState => currentState;
     
     private List<StateTransition> stateTransitions = new List<StateTransition>();
     private List<StateTransition> anyStateTransition = new List<StateTransition>();
 
     private IState currentState;
-    public IState CurrentState => currentState;
 
     public void Tick()
     {

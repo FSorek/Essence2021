@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 469219615209379256}
   - component: {fileID: 469219615209379259}
   m_Layer: 0
-  m_Name: Ramp_North
+  m_Name: Ramp_South
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 469219615240562600}
   - component: {fileID: 469219615240562603}
   m_Layer: 0
-  m_Name: Wall_North
+  m_Name: Wall_South
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 469219616390744247}
   - component: {fileID: 469219616390744246}
   m_Layer: 0
-  m_Name: Wall_South
+  m_Name: Wall_North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,8 +221,9 @@ GameObject:
   m_Component:
   - component: {fileID: 469219616447941056}
   - component: {fileID: 469219616447941059}
+  - component: {fileID: 1615529190}
   m_Layer: 0
-  m_Name: WolrdSegment
+  m_Name: WorldSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,12 +236,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469219616447941057}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 74795087676989568}
   - {fileID: 469219615311650918}
+  - {fileID: 1111767464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -256,6 +258,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472cfa7ee39f16e4195f963168bac987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliders:
+    NorthTop: {fileID: 469219616390744246}
+    NorthBottom: {fileID: 469219616914200280}
+    SouthTop: {fileID: 469219615240562603}
+    SouthBottom: {fileID: 469219615209379259}
+  zAxisTopMidPoint: 6.25
+  zAxisBottomMidPoint: 1
+--- !u!114 &1615529190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469219616447941057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce516c4f08f4d55843bcf246bcf24fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+  spawningFrequency: 1
+  spawnArea: {fileID: 469219615463356885}
 --- !u!1 &469219616914200278
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +291,7 @@ GameObject:
   - component: {fileID: 469219616914200281}
   - component: {fileID: 469219616914200280}
   m_Layer: 0
-  m_Name: Ramp_South
+  m_Name: Ramp_North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,4 +385,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5d7a5c88f7fba54bb2de52b4da04432, type: 3}
   m_PrefabInstance: {fileID: 469219615530223467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1433886600990475528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 469219616447941056}
+    m_Modifications:
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433886602102242467, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+      propertyPath: m_Name
+      value: Monster
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+--- !u!4 &1111767464 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+  m_PrefabInstance: {fileID: 1433886600990475528}
   m_PrefabAsset: {fileID: 0}

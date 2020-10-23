@@ -1,19 +1,22 @@
 ﻿using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [RequireComponent(typeof(Player))]
 public class PlayerStateMachine : MonoBehaviour
 {
     public Type CurrentStateType => stateMachine.CurrentState.GetType();
+    [SerializeField] private SegmentColliderTracker tracker;
+    [SerializeField] private Obelisk obeliskPrefab;
     [SerializeField] private GameObject fireElementPrefab;
     private StateMachine stateMachine;
 
-    private void Awake()
+    private void Start()
     {
-        var player = GetComponent<Player>();
         stateMachine = new StateMachine();
+        var player = GetComponent<Player>();
         var idle = new Idle();
-        var placingObelisk = new PlacingObelisk();
+        var placingObelisk = new PlacingObelisk(obeliskPrefab,tracker,player);
         
         var invokeFireElement = new InvokeElement(player);
         var invokeWaterElement = new InvokeElement(player);
@@ -23,6 +26,7 @@ public class PlayerStateMachine : MonoBehaviour
         var buildingFireElement = new Building(fireElementPrefab);
 
         stateMachine.AddTransition(idle, placingObelisk, () => PlayerInput.Instance.ObeliskKeyDown);
+        stateMachine.AddTransition(placingObelisk, idle, () => PlayerInput.Instance.ObeliskKeyDown || placingObelisk.Finished);
         stateMachine.AddTransition(idle, invokeFireElement, () => PlayerInput.Instance.InvokeFireDown);
         stateMachine.AddTransition(invokeFireElement, buildingFireElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeFireElement.CanBuild);
         stateMachine.AddTransition(buildingFireElement, invokeFireElement, () => PlayerInput.Instance.PrimaryActionKeyUp);
@@ -33,6 +37,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Update()
     {
         stateMachine.Tick();
+        Debug.Log(CurrentStateType);
     }
 }
 
@@ -73,16 +78,44 @@ public class Building : IState
 
 public class PlacingObelisk : IState
 {
+    public bool Finished { get; private set; }
+    private readonly Obelisk prefab;
+    private readonly SegmentColliderTracker tracker;
+    private readonly Player player;
+    private Transform currentInstance;
+
+    public PlacingObelisk(Obelisk prefab, SegmentColliderTracker tracker, Player player)
+    {
+        this.prefab = prefab;
+        this.tracker = tracker;
+        this.player = player;
+    }
     public void Tick()
     {
+        if(currentInstance == null)
+            return;
+        currentInstance.position = tracker.ClosestCollider.ClosestPoint(player.WorldPointer.transform.position);
+        currentInstance.rotation = Quaternion.LookRotation(tracker.ClosestCollider.transform.up, currentInstance.up);
+        if (PlayerInput.Instance.PrimaryActionKeyDown)
+        {
+            currentInstance = null;
+            Finished = true;
+        }
     }
 
     public void OnEnter()
     {
+        currentInstance = Object.Instantiate(prefab).transform;
+        Finished = false;
     }
 
     public void OnExit()
     {
+        if(currentInstance == null)
+            return;
+        
+        Object.Destroy(currentInstance.gameObject);
+        currentInstance = null;
     }
 }
  
@@ -112,7 +145,7 @@ public class InvokeElement : IState
 
     private Collider[] GetNearbyObelisks()
     {
-        return Physics.OverlapSphere(player.WorldPointer.position, buildRadius, obeliskLayer);
+        return Physics.OverlapSphere(player.WorldPointer.transform.position, buildRadius, obeliskLayer);
     }
 
     public void OnEnter()

@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float panSpeed = 1f;
     private Vector3 movement;
+    private IPlayerInput playerInput;
 
-    public void Move(InputAction.CallbackContext context)
+    private void Start()
     {
-        var movementValue = context.ReadValue<float>() * panSpeed;
-        movement = new Vector3(movementValue, 0 ,0);
+        playerInput = PlayerInput.Instance;
     }
 
     private void LateUpdate()
     {
-        transform.Translate(movement * Time.deltaTime);
+        var movementVector = new Vector3(playerInput.MovementInput * Time.deltaTime * panSpeed, 0,0);
+        transform.Translate(movementVector);
     }
 }

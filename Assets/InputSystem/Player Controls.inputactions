@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Attack",
+                    "name": "BonusAction",
                     "type": "Button",
                     "id": "8a0bf3a3-d52b-4d68-9268-f8bf212907fc",
                     "expectedControlType": "Button",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Absorb",
+                    "name": "SecondaryAction",
                     "type": "Button",
                     "id": "3d4f41bd-9d36-444e-baee-22e4dafa90ec",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Add Element",
+                    "name": "PrimaryAction",
                     "type": "Button",
                     "id": "7e429610-3516-4627-a452-a0d6e452edea",
                     "expectedControlType": "Button",
@@ -47,9 +47,9 @@
                 },
                 {
                     "name": "Obelisk",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "452347e0-e085-4594-aeac-e3a00ca866a3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Integer",
                     "processors": "",
                     "interactions": ""
                 },
@@ -84,6 +84,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Pointer",
+                    "type": "Value",
+                    "id": "dbfff800-b9ad-4c12-8aa5-93fd01b8fc43",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -94,7 +102,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "BonusAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -105,18 +113,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Absorb",
+                    "action": "SecondaryAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "6bca154e-a8a3-4824-b5b4-710f1cbefb39",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Add Element",
+                    "action": "PrimaryAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -216,6 +224,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf0113cb-e455-48b0-ae47-30f95233001d",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

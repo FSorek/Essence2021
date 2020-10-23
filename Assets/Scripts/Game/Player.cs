@@ -2,6 +2,6 @@
 
 public class Player : MonoBehaviour
 {
-    public Transform WorldPointer => worldPointer;
-    [SerializeField]private Transform worldPointer;
+    public WorldPointer WorldPointer => worldPointer;
+    [SerializeField] private WorldPointer worldPointer;
 }
