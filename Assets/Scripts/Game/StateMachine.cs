@@ -27,13 +27,13 @@ public class StateMachine
     {
         foreach (var transition in anyStateTransition)
         {
-            if (transition.Condition())
+            if (transition.To != currentState && transition.Condition())
                 return transition;
         }
         
         foreach (var transition in stateTransitions)
         {
-            if (transition.From == currentState && transition.Condition())
+            if (transition.To != currentState && transition.From == currentState && transition.Condition())
                 return transition;
         }
 

@@ -7,24 +7,24 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
 {
     [SerializeField] private InputAction obeliskAction;
     [SerializeField] private InputAction primaryAction;
+    [SerializeField] private InputAction invokeFireAction;
     public static IPlayerInput Instance { get; set; }
     public float MovementInput { get; private set; }
     public bool PrimaryActionKeyDown { get; private set; }
-    public bool PrimaryActionKeyUp { get; }
+    public bool PrimaryActionKeyUp { get; private set; }
     public bool ObeliskKeyDown { get; private set; }
     public bool InvokeFireDown { get; private set; }
     public bool InvokeWaterDown { get; private set; }
     public bool InvokeEarthDown { get; private set; }
     public bool InvokeAirDown { get; private set; }
     public Vector2 PointerMovement { get; private set; }
+    public Vector3 MouseRayHitPoint { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
-    public void UpdateInvokeFireDown(InputAction.CallbackContext context) => InvokeFireDown = context.ReadValueAsButton();
-    public void UpdateInvokeWaterDown(InputAction.CallbackContext context) => InvokeWaterDown = context.ReadValueAsButton();
-    public void UpdateInvokeEarthDown(InputAction.CallbackContext context) => InvokeEarthDown = context.ReadValueAsButton();
-    public void UpdateInvokeAirDown(InputAction.CallbackContext context) => InvokeAirDown = context.ReadValueAsButton();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
-
+    [SerializeField] private LayerMask mouseRayLayerMask;
+    private Camera playerCamera;
+    private WorldPointer playerPointer;
     private void Awake()
     {
         if (Instance == null)
@@ -34,13 +34,29 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
             gameObject.SetActive(false);
             Debug.LogWarning("More than one Player Input instance. Script disabled on " + gameObject.name);
         };
+        playerCamera = Camera.main;
+        playerPointer = FindObjectOfType<WorldPointer>();
     }
 
     private void Update()
     {
         ObeliskKeyDown = ButtonPressedThisFrame(obeliskAction);
         PrimaryActionKeyDown = ButtonPressedThisFrame(primaryAction);
-        Debug.Log(PrimaryActionKeyDown);
+        PrimaryActionKeyUp = ButtonReleasedThisFrame(primaryAction);
+        InvokeFireDown = ButtonPressedThisFrame(invokeFireAction);
+        MouseRayHitPoint = ReadMouseRay();
+    }
+
+    private Vector3 ReadMouseRay()
+    {
+        Vector3 hitPoint = Vector3.zero;
+        var pointerScreenPosition = playerCamera.WorldToScreenPoint(playerPointer.transform.position);
+        var cameraRay = playerCamera.ScreenPointToRay(pointerScreenPosition);
+        if (Physics.Raycast(cameraRay, out var hit, Mathf.Infinity, mouseRayLayerMask))
+        {
+            hitPoint = hit.point;
+        }
+        return hitPoint;
     }
 
     private bool ButtonPressedThisFrame(InputAction action)
@@ -52,6 +68,16 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         }
 
         return pressed;
+    }
+    private bool ButtonReleasedThisFrame(InputAction action)
+    {
+        bool released = false;
+        foreach (var control in action.controls)
+        {
+            released = ((ButtonControl) control).wasReleasedThisFrame | released;
+        }
+
+        return released;
     }
 }
 
@@ -66,4 +92,5 @@ public interface IPlayerInput
     bool InvokeEarthDown { get; }
     bool InvokeAirDown { get; }
     Vector2 PointerMovement { get; }
+    Vector3 MouseRayHitPoint { get; }
 }

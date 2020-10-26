@@ -9,7 +9,7 @@ public class SegmentRepeater : MonoBehaviour
     private readonly ObservableCollection<WorldSegment> segments = new ObservableCollection<WorldSegment>();
     private int currentSegmentIndex;
     private WorldGenerator worldGenerator;
-    private void Start()
+    private void Awake()
     {
         worldGenerator = WorldSettings.WorldGenerator;
         worldGenerator.OnSegmentCreated += (segment) => segments.Add(segment);

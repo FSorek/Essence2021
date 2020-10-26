@@ -26,9 +26,9 @@ public class WorldSegment : MonoBehaviour
         transform.position = new Vector3(anchorX, 0, 0);
     }
 
-    public Collider GetClosestCollider(float zPosition)
+    public SegmentCollider GetClosestCollider(float zPosition, float offset = 0)
     {
-        if (zPosition > 3.8)
+        if (zPosition > 0 + offset)
             return zPosition > zAxisTopMidPoint ? colliders.NorthTop : colliders.NorthBottom;
         return zPosition < zAxisBottomMidPoint ? colliders.SouthTop : colliders.SouthBottom;
     }
@@ -37,8 +37,8 @@ public class WorldSegment : MonoBehaviour
 [Serializable]
 public class WorldSegmentColliders
 {
-    public Collider NorthTop;
-    public Collider NorthBottom;
-    public Collider SouthTop;
-    public Collider SouthBottom;
+    public SegmentCollider NorthTop;
+    public SegmentCollider NorthBottom;
+    public SegmentCollider SouthTop;
+    public SegmentCollider SouthBottom;
 }

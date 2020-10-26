@@ -1,10 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(WorldPosition))]
 public class SegmentColliderTracker : MonoBehaviour
 {
-    public Collider ClosestCollider { get; private set; }
+    public SegmentCollider ClosestCollider { get; private set; }
+
+    public WorldPosition Position => position;
+
     private WorldPosition position;
 
     private void Awake()
@@ -15,6 +17,6 @@ public class SegmentColliderTracker : MonoBehaviour
     private void Update()
     {
         var currentSegment = position.CurrentSegment;
-        ClosestCollider = currentSegment.GetClosestCollider(transform.localPosition.z);
+        ClosestCollider = currentSegment.GetClosestCollider(PlayerInput.Instance.MouseRayHitPoint.z);
     }
 }

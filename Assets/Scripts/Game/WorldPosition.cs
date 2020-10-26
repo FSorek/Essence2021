@@ -13,15 +13,22 @@ public class WorldPosition : MonoBehaviour
     {
         worldGenerator = WorldSettings.WorldGenerator;
         CurrentSegment = worldGenerator.GetSegmentAt(transform.position.x);
+        UpdatePosition();
     }
 
     private void Update()
+    {
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
     {
         if (CurrentSegment == null)
         {
             CurrentSegment = worldGenerator.GetSegmentAt(transform.position.x);
             return;
         }
+
         if (SegmentPosition > CurrentSegment.Length)
         {
             CurrentSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
@@ -32,7 +39,7 @@ public class WorldPosition : MonoBehaviour
             CurrentSegment = worldGenerator.GetNextSegment(CurrentSegment);
             OnSegmentChanged?.Invoke(CurrentSegment);
         }
-        
+
         SegmentPosition = transform.InverseTransformPoint(CurrentSegment.transform.position).x;
         GlobalPosition = SegmentPosition + worldGenerator.GetRemainingSegmentsLength(CurrentSegment);
     }

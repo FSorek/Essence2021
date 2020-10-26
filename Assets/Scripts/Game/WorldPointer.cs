@@ -5,7 +5,6 @@ using UnityEngine;
 public class WorldPointer : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 2f;
-    [SerializeField] private Renderer localRenderer;
     private Camera playerCamera;
     private WorldPosition position;
     private IPlayerInput playerInput;
