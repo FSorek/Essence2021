@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
 {
     [SerializeField] private InputAction obeliskAction;
     [SerializeField] private InputAction primaryAction;
+    [SerializeField] private InputAction secondaryAction;
     [SerializeField] private InputAction invokeFireAction;
     public static IPlayerInput Instance { get; set; }
     public float MovementInput { get; private set; }
@@ -19,12 +20,15 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public bool InvokeAirDown { get; private set; }
     public Vector2 PointerMovement { get; private set; }
     public Vector3 MouseRayHitPoint { get; private set; }
+    public bool SecondaryActionKeyDown { get; private set; }
+    public bool SecondaryActionKeyUp { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
     [SerializeField] private LayerMask mouseRayLayerMask;
     private Camera playerCamera;
     private WorldPointer playerPointer;
+
     private void Awake()
     {
         if (Instance == null)
@@ -43,6 +47,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         ObeliskKeyDown = ButtonPressedThisFrame(obeliskAction);
         PrimaryActionKeyDown = ButtonPressedThisFrame(primaryAction);
         PrimaryActionKeyUp = ButtonReleasedThisFrame(primaryAction);
+        SecondaryActionKeyDown = ButtonPressedThisFrame(secondaryAction);
+        SecondaryActionKeyUp = ButtonReleasedThisFrame(secondaryAction);
         InvokeFireDown = ButtonPressedThisFrame(invokeFireAction);
         MouseRayHitPoint = ReadMouseRay();
     }
@@ -93,4 +99,6 @@ public interface IPlayerInput
     bool InvokeAirDown { get; }
     Vector2 PointerMovement { get; }
     Vector3 MouseRayHitPoint { get; }
+    bool SecondaryActionKeyDown { get; }
+    bool SecondaryActionKeyUp { get; }
 }

@@ -1,20 +1,16 @@
-﻿using UnityEngine;
-
-[RequireComponent(typeof(WorldPosition))]
-public class SegmentColliderTracker : MonoBehaviour
+﻿public class SegmentColliderTracker
 {
     public SegmentCollider ClosestCollider { get; private set; }
-
     public WorldPosition Position => position;
 
     private WorldPosition position;
 
-    private void Awake()
+    public SegmentColliderTracker(WorldPosition trackedPosition)
     {
-        position = GetComponent<WorldPosition>();
+        position = trackedPosition;
     }
-
-    private void Update()
+    
+    public void Tick()
     {
         var currentSegment = position.CurrentSegment;
         ClosestCollider = currentSegment.GetClosestCollider(PlayerInput.Instance.MouseRayHitPoint.z);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Obelisk : MonoBehaviour
+public class Obelisk : MonoBehaviour, IEssenceHolder
 {
     public Transform EssenceHolder => essenceHolder;
     public Essence CurrentEssence { get; private set; }
@@ -22,5 +22,14 @@ public class Obelisk : MonoBehaviour
     {
         CurrentEssence = essence;
         essence.transform.position = EssenceHolder.position;
+        CurrentEssence.gameObject.SetActive(true);
+    }
+
+    public Essence ExtractEssence()
+    {
+        var extractedEssence = CurrentEssence;
+        CurrentEssence.gameObject.SetActive(false);
+        CurrentEssence = null;
+        return extractedEssence;
     }
 }

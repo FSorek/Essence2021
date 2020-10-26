@@ -10,10 +10,10 @@ public class PlacingObelisk : IState
     private readonly Player player;
     private Transform currentInstance;
 
-    public PlacingObelisk(Obelisk prefab, SegmentColliderTracker tracker, Player player)
+    public PlacingObelisk(Obelisk prefab, Player player)
     {
         this.prefab = prefab;
-        this.tracker = tracker;
+        this.tracker = player.ColliderTracker;
         this.player = player;
         mouseLayer = LayerMask.NameToLayer("MouseRay");
     }

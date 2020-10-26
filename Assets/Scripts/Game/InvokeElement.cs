@@ -2,11 +2,11 @@
 
 public class InvokeElement : IState
 {
-    private readonly MouseOverSelector selector;
-    public bool CanBuild => selector.GetTarget(CanBuildOnTarget) != null;
-    public InvokeElement(MouseOverSelector selector)
+    private readonly MouseOverSelector obeliskSelector;
+    public bool CanBuild => obeliskSelector.GetTarget(CanBuildOnTarget) != null;
+    public InvokeElement(MouseOverSelector obeliskSelector)
     {
-        this.selector = selector;
+        this.obeliskSelector = obeliskSelector;
     }
     public void Tick()
     {
