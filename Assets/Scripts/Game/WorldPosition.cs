@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class WorldPosition : MonoBehaviour
+public class WorldPosition : MonoBehaviour, IWorldPosition
 {
     public event Action<WorldSegment> OnSegmentChanged;
     public float GlobalPosition { get; private set; }
@@ -43,4 +43,12 @@ public class WorldPosition : MonoBehaviour
         SegmentPosition = transform.InverseTransformPoint(CurrentSegment.transform.position).x;
         GlobalPosition = SegmentPosition + worldGenerator.GetRemainingSegmentsLength(CurrentSegment);
     }
+}
+
+public interface IWorldPosition
+{
+    float GlobalPosition { get;  }
+    float SegmentPosition { get;  }
+    WorldSegment CurrentSegment { get;  }
+
 }

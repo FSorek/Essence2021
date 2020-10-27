@@ -19,7 +19,7 @@ public class PlacingObelisk : IState
     }
     public void Tick()
     {
-        if(currentInstance == null)
+        if(currentInstance == null || tracker.ClosestCollider == null)
             return;
 
         var pointerPosition = player.WorldPointer.transform.position;

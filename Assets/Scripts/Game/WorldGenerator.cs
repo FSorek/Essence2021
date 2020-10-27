@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-public class WorldGenerator
+public class WorldGenerator : IWorldGenerator
 {
     public event Action<WorldSegment> OnSegmentCreated;
     public float MapLength => segments.Sum(segment => segment.Length);
@@ -68,4 +68,9 @@ public class WorldGenerator
 
         return null;
     }
+}
+
+public interface IWorldGenerator
+{
+    float MapLength { get; }
 }

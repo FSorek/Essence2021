@@ -20,7 +20,7 @@ public class StateMachine
             SetState(transition.To);
         }
         
-        currentState.Tick();
+        currentState?.Tick();
     }
 
     private StateTransition CheckForTransition()

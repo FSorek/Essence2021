@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, IEssenceHolder
 
     private void Awake()
     {
-        ColliderTracker = new SegmentColliderTracker(worldPointer.Position);
+        ColliderTracker = new SegmentColliderTracker(PlayerInput.Instance.WorldPointerPosition);
         ObeliskFinder = new ClosestObeliskFinder(.2f);
     }
 

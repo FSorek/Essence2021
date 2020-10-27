@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(WorldPosition))]
 public class WorldPointer : MonoBehaviour
 {
-    public WorldPosition Position => position;
+    public IWorldPosition Position => position;
     [SerializeField] private float sensitivity = 2f;
     private Camera playerCamera;
     private WorldPosition position;

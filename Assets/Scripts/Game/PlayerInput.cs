@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     [SerializeField] private InputAction secondaryAction;
     [SerializeField] private InputAction invokeFireAction;
     public static IPlayerInput Instance { get; set; }
+    public IWorldPosition WorldPointerPosition => playerPointer.Position;
     public float MovementInput { get; private set; }
     public bool PrimaryActionKeyDown { get; private set; }
     public bool PrimaryActionKeyUp { get; private set; }
@@ -19,15 +20,15 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public bool InvokeEarthDown { get; private set; }
     public bool InvokeAirDown { get; private set; }
     public Vector2 PointerMovement { get; private set; }
-    public Vector3 MouseRayHitPoint { get; private set; }
+    public Vector3 MouseRayHitPoint { get; private set; } = Vector3.zero;
     public bool SecondaryActionKeyDown { get; private set; }
     public bool SecondaryActionKeyUp { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
     [SerializeField] private LayerMask mouseRayLayerMask;
+    [SerializeField] private WorldPointer playerPointer;
     private Camera playerCamera;
-    private WorldPointer playerPointer;
 
     private void Awake()
     {
@@ -39,7 +40,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
             Debug.LogWarning("More than one Player Input instance. Script disabled on " + gameObject.name);
         };
         playerCamera = Camera.main;
-        playerPointer = FindObjectOfType<WorldPointer>();
+        if (playerPointer == null)
+            playerPointer = FindObjectOfType<WorldPointer>();
     }
 
     private void Update()
@@ -55,6 +57,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
 
     private Vector3 ReadMouseRay()
     {
+        if (playerPointer == null)
+            return Vector3.zero;
         Vector3 hitPoint = Vector3.zero;
         var pointerScreenPosition = playerCamera.WorldToScreenPoint(playerPointer.transform.position);
         var cameraRay = playerCamera.ScreenPointToRay(pointerScreenPosition);
@@ -89,6 +93,7 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
 
 public interface IPlayerInput
 {
+    IWorldPosition WorldPointerPosition { get; }
     float MovementInput { get; }
     bool PrimaryActionKeyDown { get; }
     bool PrimaryActionKeyUp { get; }

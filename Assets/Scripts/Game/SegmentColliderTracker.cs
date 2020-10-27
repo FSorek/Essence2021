@@ -1,11 +1,11 @@
 ﻿public class SegmentColliderTracker
 {
     public SegmentCollider ClosestCollider { get; private set; }
-    public WorldPosition Position => position;
+    public IWorldPosition Position => position;
 
-    private WorldPosition position;
+    private IWorldPosition position;
 
-    public SegmentColliderTracker(WorldPosition trackedPosition)
+    public SegmentColliderTracker(IWorldPosition trackedPosition)
     {
         position = trackedPosition;
     }
@@ -13,6 +13,8 @@
     public void Tick()
     {
         var currentSegment = position.CurrentSegment;
+        if(currentSegment == null)
+            return;
         ClosestCollider = currentSegment.GetClosestCollider(PlayerInput.Instance.MouseRayHitPoint.z);
     }
 }

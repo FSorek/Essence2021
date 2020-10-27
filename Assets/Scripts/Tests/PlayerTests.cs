@@ -13,6 +13,8 @@ namespace Tests
         public IEnumerator starts_in_idle_state()
         {
             yield return TestHelpers.LoadEmptyTestScene();
+            var playerInput = Substitute.For<IPlayerInput>();
+            PlayerInput.Instance = playerInput;
             var player = GetPlayer();
             yield return null;
             Assert.AreEqual(typeof(Idle),player.CurrentStateType);
