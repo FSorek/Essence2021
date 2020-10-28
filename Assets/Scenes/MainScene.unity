@@ -927,6 +927,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 469219616447941056, guid: 23e3abadc0aca2242b70700d1d5f0d96, type: 3}
   m_PrefabInstance: {fileID: 1714595862}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055755535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 730067775, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
+  m_PrefabInstance: {fileID: 8776125309826368368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e830273ef94f7b90657c4f017531dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2145046508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[INPUT MANAGER]'
       objectReference: {fileID: 0}
+    - target: {fileID: 327460943384327302, guid: 1238cc1e20dcbe9418f659b63898bbd5, type: 3}
+      propertyPath: playerPointer
+      value: 
+      objectReference: {fileID: 2055755535}
     - target: {fileID: 327460943384327303, guid: 1238cc1e20dcbe9418f659b63898bbd5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50.550682

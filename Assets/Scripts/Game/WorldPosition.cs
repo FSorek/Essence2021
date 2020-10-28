@@ -5,11 +5,12 @@ using UnityEngine;
 public class WorldPosition : MonoBehaviour, IWorldPosition
 {
     public event Action<WorldSegment> OnSegmentChanged;
+    public Vector3 TruePosition => transform.position;
     public float GlobalPosition { get; private set; }
     public float SegmentPosition { get; private set; }
     public WorldSegment CurrentSegment { get; private set; }
     private WorldGenerator worldGenerator;
-    private void Start()
+    private void OnEnable()
     {
         worldGenerator = WorldSettings.WorldGenerator;
         CurrentSegment = worldGenerator.GetSegmentAt(transform.position.x);
@@ -47,6 +48,7 @@ public class WorldPosition : MonoBehaviour, IWorldPosition
 
 public interface IWorldPosition
 {
+    Vector3 TruePosition { get; }
     float GlobalPosition { get;  }
     float SegmentPosition { get;  }
     WorldSegment CurrentSegment { get;  }

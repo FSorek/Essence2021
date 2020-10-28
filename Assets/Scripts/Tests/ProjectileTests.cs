@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Game;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -19,12 +20,12 @@ namespace Tests
         public IEnumerator moves_towards_target()
         {
             var projectile = new GameObject("PROJECTILE").AddComponent<Projectile>();
-            var target = new GameObject("TARGET").transform;
-            target.position = Vector3.right;
+            var target = Substitute.For<IWorldPosition>();
+            target.TruePosition.Returns(Vector3.right);
             projectile.SetTarget(target);
-            var startingDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
+            var startingDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
             yield return null;
-            var newDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
+            var newDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
             Assert.Less(newDistance, startingDistance);
         }
     }

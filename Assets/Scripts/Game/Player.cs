@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IEssenceHolder
 {
-    public Essence CurrentEssence { get; private set; }
     public WorldPointer WorldPointer => worldPointer;
     public LineRenderer BuildLine => buildLine;
     public LineRenderer ExtractLine => extractLine;
     public LineRenderer AbsorbLine => absorbLine;
+    public Essence CurrentEssence { get; private set; }
     public SegmentColliderTracker ColliderTracker { get; private set; }
-
     public ClosestObeliskFinder ObeliskFinder { get; private set; }
 
     [SerializeField] private WorldPointer worldPointer;
