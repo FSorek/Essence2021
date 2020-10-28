@@ -21,7 +21,7 @@ namespace Tests
             
             generator.MapLength.Returns(100);
             var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetTarget(availableTargets);
+            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
             
             Assert.AreSame(enemy, closestTarget);
         }
@@ -41,7 +41,7 @@ namespace Tests
             
             generator.MapLength.Returns(100);
             var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetTarget(availableTargets);
+            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
             
             Assert.IsNull(closestTarget);
         }
@@ -61,7 +61,7 @@ namespace Tests
             
             generator.MapLength.Returns(100);
             var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetTarget(availableTargets);
+            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
             
             Assert.AreSame(enemy, closestTarget);
         }
@@ -81,7 +81,7 @@ namespace Tests
             
             generator.MapLength.Returns(100);
             var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetTarget(availableTargets);
+            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
             
             Assert.IsNull(closestTarget);
         }

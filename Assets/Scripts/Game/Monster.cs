@@ -1,18 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(WorldPosition))]
 public class Monster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static List<IWorldPosition> ActiveMonsters { get; } = new List<IWorldPosition>();
+    private IWorldPosition position;
+    private void Awake()
     {
-        
+        position = GetComponent<IWorldPosition>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        ActiveMonsters.Add(position);
+    }
+
+    private void OnDisable()
+    {
+        ActiveMonsters.Remove(position);
     }
 }
