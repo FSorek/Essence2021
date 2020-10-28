@@ -22,7 +22,7 @@ public class Building : IState
         visual.SetPosition(0, player.WorldPointer.transform.position);
         if(timer > 0 || Finished)
             return;
-        var createdEssence = Object.Instantiate(essence);
+        var createdEssence = Object.Instantiate(essence, cachedTarget.EssenceHolder, true);
         cachedTarget.AddEssence(createdEssence);
         Finished = true;
     }

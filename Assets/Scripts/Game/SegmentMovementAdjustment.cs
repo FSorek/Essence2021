@@ -4,6 +4,7 @@
 public class SegmentMovementAdjustment : MonoBehaviour
 {
     private WorldPosition position;
+    private float segmentSwitchDeadzone = .2f;
 
     private void Awake()
     {
@@ -13,9 +14,14 @@ public class SegmentMovementAdjustment : MonoBehaviour
 
     private void AdjustPosition(WorldSegment segment)
     {
-        if (position.SegmentPosition > segment.Length)
+        if (position.SegmentPosition > position.CurrentSegment.Length)
         {
-            var adjustedPosition = new Vector3(segment.transform.position.x, transform.position.y, transform.position.z);
+            var adjustedPosition = new Vector3(segment.transform.position.x - segmentSwitchDeadzone, transform.position.y, transform.position.z);
+            transform.position = adjustedPosition;
+        }
+        else if (position.SegmentPosition < 0)
+        {
+            var adjustedPosition = new Vector3(segment.transform.position.x - segment.Length + segmentSwitchDeadzone, transform.position.y, transform.position.z);
             transform.position = adjustedPosition;
         }
     }

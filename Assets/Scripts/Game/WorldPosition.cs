@@ -32,13 +32,15 @@ public class WorldPosition : MonoBehaviour, IWorldPosition
 
         if (SegmentPosition > CurrentSegment.Length)
         {
-            CurrentSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
-            OnSegmentChanged?.Invoke(CurrentSegment);
+            var previousSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
+            OnSegmentChanged?.Invoke(previousSegment);
+            CurrentSegment = previousSegment;
         }
         else if (SegmentPosition < 0)
         {
-            CurrentSegment = worldGenerator.GetNextSegment(CurrentSegment);
-            OnSegmentChanged?.Invoke(CurrentSegment);
+            var nextSegment = worldGenerator.GetNextSegment(CurrentSegment);
+            OnSegmentChanged?.Invoke(nextSegment);
+            CurrentSegment = nextSegment;
         }
 
         SegmentPosition = transform.InverseTransformPoint(CurrentSegment.transform.position).x;

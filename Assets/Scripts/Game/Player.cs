@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, IEssenceHolder
     [SerializeField] private LineRenderer extractLine;
     [SerializeField] private LineRenderer absorbLine;
 
-    private void Awake()
+    private void Start()
     {
         ColliderTracker = new SegmentColliderTracker(PlayerInput.Instance.WorldPointerPosition);
         ObeliskFinder = new ClosestObeliskFinder(.2f);

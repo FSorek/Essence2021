@@ -6,25 +6,23 @@ public class PlacingObelisk : IState
     private static int nameIndex = 0;
     public bool Finished { get; private set; }
     private readonly Obelisk prefab;
-    private readonly SegmentColliderTracker tracker;
     private readonly Player player;
     private Transform currentInstance;
 
     public PlacingObelisk(Obelisk prefab, Player player)
     {
         this.prefab = prefab;
-        this.tracker = player.ColliderTracker;
         this.player = player;
         mouseLayer = LayerMask.NameToLayer("MouseRay");
     }
     public void Tick()
     {
-        if(currentInstance == null || tracker.ClosestCollider == null)
+        if(currentInstance == null || player.ColliderTracker == null || player.ColliderTracker.ClosestCollider == null)
             return;
 
         var pointerPosition = player.WorldPointer.transform.position;
         var obeliskPosition = PlayerInput.Instance.MouseRayHitPoint;
-        var obeliskRotation = Quaternion.LookRotation(tracker.ClosestCollider.transform.forward, currentInstance.up);
+        var obeliskRotation = Quaternion.LookRotation(player.ColliderTracker.ClosestCollider.transform.forward, currentInstance.up);
         currentInstance.position = obeliskPosition;
         currentInstance.rotation = obeliskRotation;
         Debug.DrawLine(pointerPosition, PlayerInput.Instance.MouseRayHitPoint);
@@ -33,7 +31,7 @@ public class PlacingObelisk : IState
         {
             nameIndex++;
             currentInstance.gameObject.name += nameIndex;
-            currentInstance.SetParent(tracker.ClosestCollider.transform);
+            currentInstance.SetParent(player.ColliderTracker.ClosestCollider.transform);
             currentInstance = null;
             Finished = true;
         }

@@ -7,6 +7,7 @@ public class Essence : MonoBehaviour
 {
     [SerializeField] private float range;
     [SerializeField] private float attackDelay;
+    [SerializeField] private Projectile projectile;
     private IWorldPosition target;
     private IWorldPosition position;
     private TargetFinder targetFinder;
@@ -23,10 +24,10 @@ public class Essence : MonoBehaviour
     {
         if (shotTimer > 0)
             shotTimer -= Time.deltaTime;
-        if (target != null && Mathf.Abs(target.GlobalPosition - position.GlobalPosition) > range)
-            target = null;
         if(target == null)
             target = targetFinder.GetClosestTarget(Monster.ActiveMonsters);
+        if (target != null && Mathf.Abs(target.GlobalPosition - position.GlobalPosition) > range)
+            target = null;
 
         if(canFireProjectile)
             FireProjectile();
@@ -35,8 +36,9 @@ public class Essence : MonoBehaviour
 
     private void FireProjectile()
     {
-        var projectile = new GameObject("Projectile").AddComponent<Projectile>();
-        projectile.SetTarget(target);
+        var projectileObject = Instantiate(projectile);
+        projectileObject.transform.position = transform.position;
+        projectileObject.SetTarget(target);
         shotTimer = attackDelay;
     }
 }
