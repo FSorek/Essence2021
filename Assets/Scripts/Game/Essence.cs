@@ -28,6 +28,8 @@ public class TargetFinder
         foreach (var monster in availableTargets)
         {
             var monsterDistance = Mathf.Abs(monster.GlobalPosition - origin.GlobalPosition);
+            var reapeatDistance = Mathf.Abs(monster.GlobalPosition + worldGenerator.MapLength - origin.GlobalPosition);
+            monsterDistance = monsterDistance < reapeatDistance ? monsterDistance : reapeatDistance;
             if(monsterDistance > range || distance < monsterDistance)
                 continue;
             
