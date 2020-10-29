@@ -16,7 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
         var player = GetComponent<Player>();
         var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), player.WorldPointer);
         var idle = new Idle();
-        var absorb = new Absorb(player,mouseOverObelisk);
+        var absorb = new Absorb(player, mouseOverObelisk);
         var exude = new Exude(player, mouseOverObelisk);
         var placingObelisk = new PlacingObelisk(obeliskPrefab,player);
         
