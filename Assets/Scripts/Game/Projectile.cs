@@ -35,8 +35,15 @@ namespace Game
                 gameObject.SetActive(false);
                 return;
             }
-            
-            transform.localPosition += flySpeed * Time.deltaTime * direction.GetDirection(position, target);
+
+            var directionThisFrame = direction.GetDirection(position, target);
+            var distanceThisFrame = flySpeed * Time.deltaTime;
+            if (directionThisFrame.magnitude <= distanceThisFrame)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+            transform.localPosition = directionThisFrame * distanceThisFrame;
         }
     }
 }
