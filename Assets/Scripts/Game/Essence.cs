@@ -10,7 +10,7 @@ public class Essence : MonoBehaviour
     [SerializeField] private Projectile projectile;
     private IWorldPosition position;
     private TargetFinder<Monster> targetFinder;
-    private bool canFireProjectile => targetFinder.CurrentTarget != null && shotTimer <= 0;
+    private bool CanFireProjectile => targetFinder.CurrentTarget != null && shotTimer <= 0;
     private float shotTimer = 0;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class Essence : MonoBehaviour
             return;
         }
         targetFinder.UpdateTarget();
-        if(canFireProjectile)
+        if(CanFireProjectile)
             FireProjectile();
     }
 
