@@ -26,12 +26,8 @@ public class Essence : MonoBehaviour
             shotTimer -= Time.deltaTime;
         if(target == null)
             target = targetFinder.GetClosestTarget(Monster.ActiveMonsters);
-        if (target != null && Mathf.Abs(target.Position.GlobalPosition - position.GlobalPosition) > range)
-            target = null;
-
         if(canFireProjectile)
             FireProjectile();
-        
     }
 
     private void FireProjectile()

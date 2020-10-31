@@ -6,7 +6,7 @@ namespace Game
     [RequireComponent(typeof(WorldPosition))]
     public class Projectile : MonoBehaviour
     {
-        public event Action<ITakeDamage> OnTargetHit;
+        public event Action<IEntity> OnTargetHit;
         private IEntity target;
         private IWorldPosition position;
         private RepeatedWorldDirection direction;
@@ -42,9 +42,10 @@ namespace Game
             if (directionThisFrame.magnitude <= distanceThisFrame)
             {
                 gameObject.SetActive(false);
+                OnTargetHit?.Invoke(target);
                 return;
             }
-            transform.localPosition = directionThisFrame * distanceThisFrame;
+            transform.localPosition += directionThisFrame * distanceThisFrame;
         }
     }
 }

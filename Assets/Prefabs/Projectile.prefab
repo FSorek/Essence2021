@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8076923332150091412}
   - component: {fileID: 3862065270073497529}
-  - component: {fileID: 7907279906546517107}
   - component: {fileID: 965579452294560592}
+  - component: {fileID: 7907279906546517107}
+  - component: {fileID: -6081245147721726973}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -46,6 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcef9e0f989c41c68c8fdd112f2b1bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &965579452294560592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2933793771839826751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b528d43dff4049bce19730a706b728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7907279906546517107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flySpeed: 8
---- !u!114 &965579452294560592
+--- !u!114 &-6081245147721726973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,9 +81,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2933793771839826751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b528d43dff4049bce19730a706b728, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c897e092c754fd8ba0462b84ad88e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
 --- !u!1 &4818317527405292286
 GameObject:
   m_ObjectHideFlags: 0

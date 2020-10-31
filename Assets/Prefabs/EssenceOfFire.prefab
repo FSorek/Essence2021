@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 15
-  attackDelay: 3
+  attackDelay: 1
   projectile: {fileID: 7907279906546517107, guid: 2dc39ebf653f4894e8f0df813d0f8ba5, type: 3}
 --- !u!114 &-372637432979345503
 MonoBehaviour:
