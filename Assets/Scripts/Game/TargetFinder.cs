@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class TargetFinder<T> where T : class, IEntity
 {
+    private const float UPDATE_FREQUENCY = .2f;
+    public T CurrentTarget { get; private set; }
+    
     private readonly IWorldPosition origin;
     private readonly float range;
     private readonly IWorldGenerator worldGenerator;
     private readonly IEntityFactory<T> factory;
     private WorldPosition[] aliveMonsters;
+    private float lastUpdateTime = 0;
 
     public TargetFinder(IWorldPosition origin, float range, IWorldGenerator worldGenerator, IEntityFactory<T> factory)
     {
@@ -17,6 +21,14 @@ public class TargetFinder<T> where T : class, IEntity
         this.factory = factory;
     }
 
+    public void UpdateTarget()
+    {
+        if (Time.time - lastUpdateTime < UPDATE_FREQUENCY)
+            return;
+
+        CurrentTarget = GetClosestTarget();
+        lastUpdateTime = Time.time;
+    }
     public T GetClosestTarget()
     {
         T closestPosition = null;
