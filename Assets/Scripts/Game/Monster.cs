@@ -7,14 +7,15 @@ using UnityEngine;
 public class Monster : MonoBehaviour, ITakeDamage, IEntity
 {
     public static List<Monster> ActiveMonsters { get; } = new List<Monster>();
-    public Health Health { get; private set; }
+    public Health Health => health;
     public IWorldPosition Position => position;
     [SerializeField] private float maxHealth;
+    private Health health;
     private IWorldPosition position;
     private void Awake()
     {
         position = GetComponent<IWorldPosition>();
-        Health = new Health(maxHealth);
+        health = new Health(maxHealth);
     }
 
     private void OnEnable()
