@@ -8,7 +8,7 @@ public class Essence : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float attackDelay;
     [SerializeField] private Projectile projectile;
-    private IWorldPosition target;
+    private Monster target;
     private IWorldPosition position;
     private TargetFinder targetFinder;
     private bool canFireProjectile => target != null && shotTimer <= 0;
@@ -26,7 +26,7 @@ public class Essence : MonoBehaviour
             shotTimer -= Time.deltaTime;
         if(target == null)
             target = targetFinder.GetClosestTarget(Monster.ActiveMonsters);
-        if (target != null && Mathf.Abs(target.GlobalPosition - position.GlobalPosition) > range)
+        if (target != null && Mathf.Abs(target.Position.GlobalPosition - position.GlobalPosition) > range)
             target = null;
 
         if(canFireProjectile)

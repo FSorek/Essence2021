@@ -20,24 +20,24 @@ namespace Tests
         public IEnumerator moves_towards_target()
         {
             var projectile = new GameObject("PROJECTILE").AddComponent<Projectile>();
-            var target = Substitute.For<IWorldPosition>();
-            target.TruePosition.Returns(Vector3.right);
+            var target = new GameObject("TARGET").AddComponent<Monster>();
+            target.transform.position = Vector3.right;
             projectile.SetTarget(target);
-            var startingDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
+            var startingDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
             yield return null;
-            var newDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
+            var newDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
             Assert.Less(newDistance, startingDistance);
         }
         [UnityTest]
         public IEnumerator hitting_damageable_target_performs_taking_damage()
         {
             var projectile = new GameObject("PROJECTILE").AddComponent<Projectile>();
-            var target = Substitute.For<IWorldPosition>();
-            target.TruePosition.Returns(Vector3.right);
+            var target = new GameObject("TARGET").AddComponent<Monster>();
+            target.transform.position = Vector3.right;
             projectile.SetTarget(target);
-            var startingDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
+            var startingDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
             yield return null;
-            var newDistance = Vector2.Distance(projectile.transform.position, target.TruePosition);
+            var newDistance = Vector2.Distance(projectile.transform.position, target.transform.position);
             Assert.Less(newDistance, startingDistance);
         }
     }

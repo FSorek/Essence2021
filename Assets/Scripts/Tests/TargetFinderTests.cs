@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Tests
 {
@@ -11,10 +12,12 @@ namespace Tests
             float range = 5f;
             IWorldGenerator generator = Substitute.For<IWorldGenerator>();
             var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IWorldPosition>();
+            var enemy = Substitute.For<IEntity>();
+            var enemyPosition = Substitute.For<IWorldPosition>();
             origin.GlobalPosition.Returns(5);
-            enemy.GlobalPosition.Returns(9);
-            var availableTargets = new IWorldPosition[]
+            enemyPosition.GlobalPosition.Returns(9);
+            enemy.Position.Returns(enemyPosition);
+            var availableTargets = new IEntity[]
             {
                 enemy
             };
@@ -31,10 +34,12 @@ namespace Tests
             float range = 5f;
             IWorldGenerator generator = Substitute.For<IWorldGenerator>();
             var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IWorldPosition>();
+            var enemy = Substitute.For<IEntity>();
+            var enemyPosition = Substitute.For<IWorldPosition>();
             origin.GlobalPosition.Returns(5);
-            enemy.GlobalPosition.Returns(11);
-            var availableTargets = new IWorldPosition[]
+            enemyPosition.GlobalPosition.Returns(11);
+            enemy.Position.Returns(enemyPosition);
+            var availableTargets = new IEntity[]
             {
                 enemy
             };
@@ -51,10 +56,12 @@ namespace Tests
             float range = 5f;
             IWorldGenerator generator = Substitute.For<IWorldGenerator>();
             var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IWorldPosition>();
+            var enemy = Substitute.For<IEntity>();
+            var enemyPosition = Substitute.For<IWorldPosition>();
             origin.GlobalPosition.Returns(96);
-            enemy.GlobalPosition.Returns(1);
-            var availableTargets = new IWorldPosition[]
+            enemyPosition.GlobalPosition.Returns(1);
+            enemy.Position.Returns(enemyPosition);
+            var availableTargets = new IEntity[]
             {
                 enemy
             };
@@ -71,10 +78,12 @@ namespace Tests
             float range = 5f;
             IWorldGenerator generator = Substitute.For<IWorldGenerator>();
             var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IWorldPosition>();
+            var enemy = Substitute.For<IEntity>();
+            var enemyPosition = Substitute.For<IWorldPosition>();
             origin.GlobalPosition.Returns(96);
-            enemy.GlobalPosition.Returns(2);
-            var availableTargets = new IWorldPosition[]
+            enemyPosition.GlobalPosition.Returns(9);
+            enemy.Position.Returns(enemyPosition);
+            var availableTargets = new IEntity[]
             {
                 enemy
             };

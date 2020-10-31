@@ -15,20 +15,20 @@ public class TargetFinder
         this.worldGenerator = worldGenerator;
     }
 
-    public IWorldPosition GetClosestTarget(IEnumerable<IWorldPosition> availableTargets)
+    public T GetClosestTarget<T>(IEnumerable<T> availableTargets) where T : class, IEntity
     {
-        IWorldPosition closestPosition = null;
+        T closestPosition = null;
         float distance = Mathf.Infinity;
-        foreach (var monster in availableTargets)
+        foreach (var entity in availableTargets)
         {
-            var monsterDistance = Mathf.Abs(monster.GlobalPosition - origin.GlobalPosition);
-            var reapeatDistance = Mathf.Abs(monster.GlobalPosition + worldGenerator.MapLength - origin.GlobalPosition);
+            var monsterDistance = Mathf.Abs(entity.Position.GlobalPosition - origin.GlobalPosition);
+            var reapeatDistance = Mathf.Abs(entity.Position.GlobalPosition + worldGenerator.MapLength - origin.GlobalPosition);
             monsterDistance = monsterDistance < reapeatDistance ? monsterDistance : reapeatDistance;
             if(monsterDistance > range || distance < monsterDistance)
                 continue;
             
             distance = monsterDistance;
-            closestPosition = monster;
+            closestPosition = entity;
         }
         return closestPosition;
     }

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(WorldPosition))]
-public class Monster : MonoBehaviour, ITakeDamage
+public class Monster : MonoBehaviour, ITakeDamage, IEntity
 {
-    public static List<IWorldPosition> ActiveMonsters { get; } = new List<IWorldPosition>();
-    [SerializeField] private float maxHealth;
+    public static List<Monster> ActiveMonsters { get; } = new List<Monster>();
     public Health Health { get; private set; }
+    public IWorldPosition Position => position;
+    [SerializeField] private float maxHealth;
     private IWorldPosition position;
     private void Awake()
     {
@@ -18,11 +19,16 @@ public class Monster : MonoBehaviour, ITakeDamage
 
     private void OnEnable()
     {
-        ActiveMonsters.Add(position);
+        ActiveMonsters.Add(this);
     }
 
     private void OnDisable()
     {
-        ActiveMonsters.Remove(position);
+        ActiveMonsters.Remove(this);
     }
+}
+
+public interface IEntity
+{
+    IWorldPosition Position { get; }
 }

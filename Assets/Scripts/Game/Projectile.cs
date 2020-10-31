@@ -6,7 +6,8 @@ namespace Game
     [RequireComponent(typeof(WorldPosition))]
     public class Projectile : MonoBehaviour
     {
-        private IWorldPosition target;
+        public event Action<ITakeDamage> OnTargetHit;
+        private IEntity target;
         private IWorldPosition position;
         private RepeatedWorldDirection direction;
         [SerializeField] private float flySpeed = 3f;
@@ -23,7 +24,7 @@ namespace Game
                 transform.SetParent(position.CurrentSegment.transform);
         }
 
-        public void SetTarget(IWorldPosition target)
+        public void SetTarget(IEntity target)
         {
             this.target = target;
         }
@@ -36,7 +37,7 @@ namespace Game
                 return;
             }
 
-            var directionThisFrame = direction.GetDirection(position, target);
+            var directionThisFrame = direction.GetDirection(position, target.Position);
             var distanceThisFrame = flySpeed * Time.deltaTime;
             if (directionThisFrame.magnitude <= distanceThisFrame)
             {
