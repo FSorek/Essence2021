@@ -10,30 +10,29 @@ public class Essence : MonoBehaviour
     [SerializeField] private Projectile projectile;
     private Monster target;
     private IWorldPosition position;
-    private TargetFinder targetFinder;
+    private TargetFinder<Monster> targetFinder;
     private bool canFireProjectile => target != null && shotTimer <= 0;
     private float shotTimer = 0;
 
     private void Awake()
     {
         position = GetComponent<IWorldPosition>();
-        targetFinder = new TargetFinder(position, range, WorldSettings.WorldGenerator);
+        targetFinder = new TargetFinder<Monster>(position, range, WorldSettings.WorldGenerator, WorldSettings.MonsterFactory);
     }
 
     private void Update()
     {
         if (shotTimer > 0)
             shotTimer -= Time.deltaTime;
-        if(target == null)
-            target = targetFinder.GetClosestTarget(Monster.ActiveMonsters);
+        if(target == null || !target.Health.IsAlive)
+            target = targetFinder.GetClosestTarget();
         if(canFireProjectile)
             FireProjectile();
     }
 
     private void FireProjectile()
     {
-        var projectileObject = Instantiate(projectile);
-        projectileObject.transform.position = transform.position;
+        var projectileObject = Instantiate(projectile, transform.position, Quaternion.identity);
         projectileObject.SetTarget(target);
         shotTimer = attackDelay;
     }

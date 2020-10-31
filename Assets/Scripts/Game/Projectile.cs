@@ -45,7 +45,7 @@ namespace Game
                 OnTargetHit?.Invoke(target);
                 return;
             }
-            transform.localPosition += directionThisFrame * distanceThisFrame;
+            transform.localPosition += directionThisFrame.normalized * distanceThisFrame;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Game
                 targetPosition = new Vector3(from.TruePosition.x + trueDistance, to.TruePosition.y, to.TruePosition.z);
             }
 
-            var direction = (targetPosition - from.TruePosition).normalized;
+            var direction = targetPosition - from.TruePosition;
             return direction;
         }
     }

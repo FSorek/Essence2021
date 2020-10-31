@@ -20,7 +20,7 @@ namespace Tests
             origin.TruePosition.Returns(new Vector3(98,0,0));
             target.TruePosition.Returns(new Vector3(2,0,0));
 
-            var direction = worldDirection.GetDirection(origin, target);
+            var direction = worldDirection.GetDirection(origin, target).normalized;
             Assert.AreEqual(Vector3.right, direction);
         }
         
@@ -35,7 +35,7 @@ namespace Tests
             origin.TruePosition.Returns(new Vector3(2,0,0));
             target.TruePosition.Returns(new Vector3(98,0,0));
 
-            var direction = worldDirection.GetDirection(origin, target);
+            var direction = worldDirection.GetDirection(origin, target).normalized;
             Assert.AreEqual(Vector3.left, direction);
         }
         
@@ -50,7 +50,7 @@ namespace Tests
             origin.TruePosition.Returns(new Vector3(5,0,0));
             target.TruePosition.Returns(new Vector3(25,0,0));
 
-            var direction = worldDirection.GetDirection(origin, target);
+            var direction = worldDirection.GetDirection(origin, target).normalized;
             Assert.AreEqual(Vector3.right, direction);
         }
     }

@@ -2,13 +2,15 @@
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform monsterPrefab;
+    [SerializeField] private Monster monsterPrefab;
     [SerializeField][Min(.5f)] private float spawningFrequency;
     [SerializeField] private Collider spawnArea;
+    private MonsterFactory factory;
 
     private void Start()
     {
         InvokeRepeating(nameof(Spawn), spawningFrequency, spawningFrequency);
+        factory = WorldSettings.MonsterFactory;
     }
 
     private void Spawn()
@@ -17,6 +19,6 @@ public class MonsterSpawner : MonoBehaviour
         var spawnPointZ = transform.position.z - spawnArea.bounds.size.z/2 + Random.Range(0, spawnArea.bounds.size.z);
         var spawnPosition = new Vector3(spawnPointX, transform.position.y, spawnPointZ);
 
-        Instantiate(monsterPrefab, spawnPosition, Quaternion.identity, spawnArea.transform.parent);
+        factory.CreateMonster(monsterPrefab, spawnPosition, spawnArea.transform.parent);
     }
 }

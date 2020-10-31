@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce516c4f08f4d55843bcf246bcf24fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 1433886602102242464, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
+  monsterPrefab: {fileID: -7850297808880355723, guid: f191f2c4e9444eb4b9b3835602c2a722, type: 3}
   spawningFrequency: 5
   spawnArea: {fileID: 469219615463356885}
 --- !u!1 &469219616914200278

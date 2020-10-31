@@ -10,21 +10,15 @@ namespace Tests
         public void finds_target_in_range()
         {
             float range = 5f;
-            IWorldGenerator generator = Substitute.For<IWorldGenerator>();
-            var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IEntity>();
-            var enemyPosition = Substitute.For<IWorldPosition>();
-            origin.GlobalPosition.Returns(5);
-            enemyPosition.GlobalPosition.Returns(9);
-            enemy.Position.Returns(enemyPosition);
+            var origin = GetEntity(5);
+            var enemy = GetEntity(9);
             var availableTargets = new IEntity[]
             {
                 enemy
             };
-            
-            generator.MapLength.Returns(100);
-            var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
+            var targetFinder = GetTargetFinder(range, origin.Position, availableTargets);
+
+            var closestTarget = targetFinder.GetClosestTarget();
             
             Assert.AreSame(enemy, closestTarget);
         }
@@ -32,21 +26,15 @@ namespace Tests
         public void doesnt_find_target_when_outside_of_range()
         {
             float range = 5f;
-            IWorldGenerator generator = Substitute.For<IWorldGenerator>();
-            var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IEntity>();
-            var enemyPosition = Substitute.For<IWorldPosition>();
-            origin.GlobalPosition.Returns(5);
-            enemyPosition.GlobalPosition.Returns(11);
-            enemy.Position.Returns(enemyPosition);
+            var origin = GetEntity(5);
+            var enemy = GetEntity(11);
             var availableTargets = new IEntity[]
             {
                 enemy
             };
-            
-            generator.MapLength.Returns(100);
-            var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
+            var targetFinder = GetTargetFinder(range, origin.Position, availableTargets);
+
+            var closestTarget = targetFinder.GetClosestTarget();
             
             Assert.IsNull(closestTarget);
         }
@@ -54,21 +42,15 @@ namespace Tests
         public void finds_target_in_range_close_to_map_repeat_point()
         {
             float range = 5f;
-            IWorldGenerator generator = Substitute.For<IWorldGenerator>();
-            var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IEntity>();
-            var enemyPosition = Substitute.For<IWorldPosition>();
-            origin.GlobalPosition.Returns(96);
-            enemyPosition.GlobalPosition.Returns(1);
-            enemy.Position.Returns(enemyPosition);
+            var origin = GetEntity(96);
+            var enemy = GetEntity(1);
             var availableTargets = new IEntity[]
             {
                 enemy
             };
-            
-            generator.MapLength.Returns(100);
-            var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
+            var targetFinder = GetTargetFinder(range, origin.Position, availableTargets);
+
+            var closestTarget = targetFinder.GetClosestTarget();
             
             Assert.AreSame(enemy, closestTarget);
         }
@@ -76,23 +58,38 @@ namespace Tests
         public void doesnt_find_target_out_of_range_close_to_map_repeat_point()
         {
             float range = 5f;
-            IWorldGenerator generator = Substitute.For<IWorldGenerator>();
-            var origin = Substitute.For<IWorldPosition>();
-            var enemy = Substitute.For<IEntity>();
-            var enemyPosition = Substitute.For<IWorldPosition>();
-            origin.GlobalPosition.Returns(96);
-            enemyPosition.GlobalPosition.Returns(9);
-            enemy.Position.Returns(enemyPosition);
+            var origin = GetEntity(96);
+            var enemy = GetEntity(9);
             var availableTargets = new IEntity[]
             {
                 enemy
             };
-            
-            generator.MapLength.Returns(100);
-            var targetFinder = new TargetFinder(origin, range, generator);
-            var closestTarget = targetFinder.GetClosestTarget(availableTargets);
+            var targetFinder = GetTargetFinder(range, origin.Position, availableTargets);
+
+            var closestTarget = targetFinder.GetClosestTarget();
             
             Assert.IsNull(closestTarget);
+        }
+
+        private TargetFinder<IEntity> GetTargetFinder(float range, IWorldPosition origin, IEntity[] targets)
+        {
+            IWorldGenerator generator = Substitute.For<IWorldGenerator>();
+            var monsterFactory = Substitute.For<IEntityFactory<IEntity>>();
+            monsterFactory.GetAliveEntities().Returns(targets);
+            generator.MapLength.Returns(100);
+            var targetFinder = new TargetFinder<IEntity>(origin, range, generator, monsterFactory);
+
+            return targetFinder;
+        }
+
+        private IEntity GetEntity(float globalPosition)
+        {
+            var entity = Substitute.For<IEntity>();
+            var entityPosition = Substitute.For<IWorldPosition>();
+            entityPosition.GlobalPosition.Returns(globalPosition);
+            entity.Position.Returns(entityPosition);
+            
+            return entity;
         }
     }
 }
