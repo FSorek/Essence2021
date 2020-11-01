@@ -11,12 +11,13 @@ public class Essence : MonoBehaviour
     private IWorldPosition position;
     private TargetFinder<Monster> targetFinder;
     private bool CanFireProjectile => targetFinder.CurrentTarget != null && shotTimer <= 0;
-    private float shotTimer = 0;
+    private float shotTimer;
 
     private void Awake()
     {
         position = GetComponent<IWorldPosition>();
         targetFinder = new TargetFinder<Monster>(position, range, WorldSettings.WorldGenerator, WorldSettings.MonsterFactory);
+        shotTimer = attackDelay;
     }
 
     private void Update()
