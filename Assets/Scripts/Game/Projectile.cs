@@ -10,6 +10,7 @@ namespace Game
         private IEntity target;
         private IWorldPosition position;
         private RepeatedWorldDirection direction;
+        private bool targetReached;
         [SerializeField] private float flySpeed = 3f;
 
         private void Awake()
@@ -27,26 +28,29 @@ namespace Game
         public void SetTarget(IEntity target)
         {
             this.target = target;
+            targetReached = false;
         }
 
         public void Update()
         {
             if(target == null)
-            {
-                gameObject.SetActive(false);
                 return;
-            }
-
+            
             var directionThisFrame = direction.GetDirection(position, target.Position);
             var distanceThisFrame = flySpeed * Time.deltaTime;
             if (directionThisFrame.magnitude <= distanceThisFrame)
             {
-                gameObject.SetActive(false);
                 OnTargetHit?.Invoke(target);
                 target = null;
+                Invoke(nameof(Disable), 2f);
                 return;
             }
             transform.localPosition += directionThisFrame.normalized * distanceThisFrame;
+        }
+
+        private void Disable()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
