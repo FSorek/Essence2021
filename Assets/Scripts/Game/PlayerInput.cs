@@ -65,7 +65,7 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         if (playerPointer == null)
             return Vector3.zero;
         Vector3 hitPosition = Vector3.zero;
-        var pointerScreenPosition = playerCamera.WorldToScreenPoint(playerPointer.transform.position);
+        var pointerScreenPosition = playerCamera.WorldToScreenPoint(playerPointer.PointingPosition);
         var cameraRay = playerCamera.ScreenPointToRay(pointerScreenPosition);
         if (Physics.Raycast(cameraRay, out var mouseRayHit, Mathf.Infinity, mouseRayLayerMask))
         {

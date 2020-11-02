@@ -23,7 +23,7 @@ public class Absorb : IState
     public void Tick()
     {
         timer -= Time.deltaTime;
-        absorbLine.SetPosition(0, player.WorldPointer.transform.position);
+        absorbLine.SetPosition(0, player.WorldPointer.ParticlePosition);
         if(timer > 0)
             return;
         var extractedEssence = cachedTarget.ExtractEssence();
@@ -86,13 +86,13 @@ public class Exude : IState
     {
         this.player = player;
         this.obeliskSelector = obeliskSelector;
-        this.extractLine = player.ExtractLine;
+        this.extractLine = player.ExudeLine;
     }
 
     public void Tick()
     {
         timer -= Time.deltaTime;
-        extractLine.SetPosition(0, player.WorldPointer.transform.position);
+        extractLine.SetPosition(0, player.WorldPointer.ParticlePosition);
         if(timer > 0)
             return;
         var extractedEssence = player.ExtractEssence();

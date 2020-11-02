@@ -5,7 +5,7 @@ public class Player : MonoBehaviour, IEssenceHolder
 {
     public WorldPointer WorldPointer => worldPointer;
     public LineRenderer BuildLine => buildLine;
-    public LineRenderer ExtractLine => extractLine;
+    public LineRenderer ExudeLine => exudeLine;
     public LineRenderer AbsorbLine => absorbLine;
     public Essence CurrentEssence { get; private set; }
     public SegmentColliderTracker ColliderTracker { get; private set; }
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IEssenceHolder
 
     [SerializeField] private WorldPointer worldPointer;
     [SerializeField] private LineRenderer buildLine;
-    [SerializeField] private LineRenderer extractLine;
+    [SerializeField] private LineRenderer exudeLine;
     [SerializeField] private LineRenderer absorbLine;
 
     private void Start()

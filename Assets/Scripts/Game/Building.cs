@@ -19,7 +19,7 @@ public class Building : IState
     public void Tick()
     {
         timer -= Time.deltaTime;
-        visual.SetPosition(0, player.WorldPointer.transform.position);
+        visual.SetPosition(0, player.WorldPointer.ParticlePosition);
         if(timer > 0 || Finished)
             return;
         var createdEssence = Object.Instantiate(essence, cachedTarget.EssenceHolder, true);

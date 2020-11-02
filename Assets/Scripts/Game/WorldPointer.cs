@@ -5,8 +5,12 @@ using UnityEngine;
 public class WorldPointer : MonoBehaviour
 {
     public IWorldPosition Position => position;
+    public Vector3 ParticlePosition => particlePosition.position;
+    public Vector3 PointingPosition => pointingPosition.position;
 
     [SerializeField] private float sensitivity = 2f;
+    [SerializeField] private Transform particlePosition;
+    [SerializeField] private Transform pointingPosition;
     private Camera playerCamera;
     private WorldPosition position;
     private IPlayerInput playerInput;
