@@ -43,6 +43,7 @@ namespace Game
             {
                 gameObject.SetActive(false);
                 OnTargetHit?.Invoke(target);
+                target = null;
                 return;
             }
             transform.localPosition += directionThisFrame.normalized * distanceThisFrame;

@@ -14,7 +14,9 @@ public class PlacingObelisk : IState
     }
     public void Tick()
     {
-        if(currentInstance == null || player.ColliderTracker == null || player.ColliderTracker.ClosestCollider == null)
+        if(currentInstance == null 
+           || player.ColliderTracker == null 
+           || player.ColliderTracker.ClosestCollider == null)
             return;
 
         var obeliskPosition = PlayerInput.Instance.MouseRayHitPoint;

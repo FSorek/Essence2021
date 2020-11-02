@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldPointer : MonoBehaviour
 {
     public IWorldPosition Position => position;
+
     [SerializeField] private float sensitivity = 2f;
     private Camera playerCamera;
     private WorldPosition position;

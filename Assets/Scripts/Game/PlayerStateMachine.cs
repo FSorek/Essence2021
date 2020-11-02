@@ -9,12 +9,13 @@ public class PlayerStateMachine : MonoBehaviour
     private StateMachine stateMachine;
     [SerializeField] private Obelisk obeliskPrefab;
     [SerializeField] private Essence essenceOfFire;
+    [SerializeField] private FireEssenceAttack fireAttack;
     private void Start()
     {
         stateMachine = new StateMachine();
         stateMachine.OnStateChanged += HandleStateChanged;
         var player = GetComponent<Player>();
-        var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), player.WorldPointer);
+        var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), 1f, 1);
         var idle = new Idle();
         var absorb = new Absorb(player, mouseOverObelisk);
         var exude = new Exude(player, mouseOverObelisk);
@@ -26,6 +27,8 @@ public class PlayerStateMachine : MonoBehaviour
         var invokeAirElement = new InvokeElement(mouseOverObelisk);
         
         var buildingFireElement = new Building(essenceOfFire, player);
+       
+        var attack = new Attack(fireAttack);
 
         stateMachine.AddAnyTransition(placingObelisk, () => PlayerInput.Instance.ObeliskKeyDown && player.CurrentEssence == null);
         stateMachine.AddAnyTransition(invokeFireElement, () => PlayerInput.Instance.InvokeFireDown && player.CurrentEssence == null);
@@ -38,6 +41,8 @@ public class PlayerStateMachine : MonoBehaviour
         stateMachine.AddTransition(absorb, idle, () => PlayerInput.Instance.SecondaryActionKeyUp || absorb.Finished);
         stateMachine.AddTransition(idle, exude, () => PlayerInput.Instance.PrimaryActionKeyDown && player.CurrentEssence != null && exude.CanExtract);
         stateMachine.AddTransition(exude, idle, () => PlayerInput.Instance.PrimaryActionKeyUp || exude.Finished);
+        stateMachine.AddTransition(idle, attack, () => PlayerInput.Instance.AttackActionKeyDown && player.CurrentEssence != null);
+        stateMachine.AddTransition(attack, idle, () => PlayerInput.Instance.AttackActionKeyUp);
 
         stateMachine.SetState(idle);
     }

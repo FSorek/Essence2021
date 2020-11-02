@@ -51,22 +51,26 @@ public class ClosestObeliskFinder
 
 public class MouseOverSelector
 {
-    public IEnumerable<Collider> Targets => targets;
     public int TargetsSize { get; private set; }
-    private readonly float rayRadius = 1f;
+    private readonly float rayRadius;
     private readonly LayerMask layerMask;
-    private readonly Transform pointer;
-    private Collider[] targets = new Collider[5];
+    private readonly Collider[] targets;
 
-    public MouseOverSelector(LayerMask layerMask, WorldPointer pointer)
+    public MouseOverSelector(LayerMask layerMask, float radius, int targetCap)
     {
         this.layerMask = layerMask;
-        this.pointer = pointer.transform;
+        targets = new Collider[targetCap];
+        rayRadius = radius;
     }
 
+    public Collider[] GetAllTargets()
+    {
+        TargetsSize = Physics.OverlapCapsuleNonAlloc(WorldSettings.ActivePointer.transform.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, targets, layerMask);
+        return targets;
+    }
     public Collider GetTarget(Func<Collider, bool> filter = null)
     {
-        TargetsSize = Physics.OverlapCapsuleNonAlloc(pointer.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, targets, layerMask);
+        TargetsSize = Physics.OverlapCapsuleNonAlloc(WorldSettings.ActivePointer.transform.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, targets, layerMask);
         if (TargetsSize <= 0)
             return null;
         Collider target = filter != null ? targets.FirstOrDefault(filter.Invoke) : targets.FirstOrDefault();

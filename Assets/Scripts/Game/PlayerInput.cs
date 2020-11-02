@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     [SerializeField] private InputAction primaryAction;
     [SerializeField] private InputAction secondaryAction;
     [SerializeField] private InputAction invokeFireAction;
+    [SerializeField] private InputAction attackAction;
     public static IPlayerInput Instance { get; set; }
     public IWorldPosition WorldPointerPosition => playerPointer.Position;
     public float MovementInput { get; private set; }
@@ -23,6 +24,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public Vector3 MouseRayHitPoint { get; private set; } = Vector3.zero;
     public bool SecondaryActionKeyDown { get; private set; }
     public bool SecondaryActionKeyUp { get; private set; }
+    public bool AttackActionKeyDown { get; private set; }
+    public bool AttackActionKeyUp { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
@@ -52,6 +55,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         SecondaryActionKeyDown = ButtonPressedThisFrame(secondaryAction);
         SecondaryActionKeyUp = ButtonReleasedThisFrame(secondaryAction);
         InvokeFireDown = ButtonPressedThisFrame(invokeFireAction);
+        AttackActionKeyDown = ButtonPressedThisFrame(attackAction);
+        AttackActionKeyUp = ButtonReleasedThisFrame(attackAction);
         MouseRayHitPoint = ReadMouseRay();
     }
 
@@ -59,14 +64,14 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     {
         if (playerPointer == null)
             return Vector3.zero;
-        Vector3 hitPoint = Vector3.zero;
+        Vector3 hitPosition = Vector3.zero;
         var pointerScreenPosition = playerCamera.WorldToScreenPoint(playerPointer.transform.position);
         var cameraRay = playerCamera.ScreenPointToRay(pointerScreenPosition);
-        if (Physics.Raycast(cameraRay, out var hit, Mathf.Infinity, mouseRayLayerMask))
+        if (Physics.Raycast(cameraRay, out var mouseRayHit, Mathf.Infinity, mouseRayLayerMask))
         {
-            hitPoint = hit.point;
+            hitPosition = mouseRayHit.point;
         }
-        return hitPoint;
+        return hitPosition;
     }
 
     private bool ButtonPressedThisFrame(InputAction action)
@@ -106,4 +111,6 @@ public interface IPlayerInput
     Vector3 MouseRayHitPoint { get; }
     bool SecondaryActionKeyDown { get; }
     bool SecondaryActionKeyUp { get; }
+    bool AttackActionKeyDown { get; }
+    bool AttackActionKeyUp { get; }
 }

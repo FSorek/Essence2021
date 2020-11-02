@@ -28,9 +28,11 @@ public class WorldSegment : MonoBehaviour
 
     public SegmentCollider GetClosestCollider(float zPosition, float offset = 0)
     {
-        if (zPosition > 0 + offset)
+        if (zPosition > 3.5 + offset)
             return zPosition > zAxisTopMidPoint ? colliders.NorthTop : colliders.NorthBottom;
-        return zPosition < zAxisBottomMidPoint ? colliders.SouthTop : colliders.SouthBottom;
+        if(zPosition < -3.5f + offset)
+            return zPosition < zAxisBottomMidPoint ? colliders.SouthTop : colliders.SouthBottom;
+        return null;
     }
 }
 

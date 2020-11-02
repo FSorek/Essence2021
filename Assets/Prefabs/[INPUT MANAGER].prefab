@@ -206,6 +206,23 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Invoke Fire
       m_Flags: 0
+  attackAction:
+    m_Name: Attack
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: c2889d9e-4b3c-4e21-be66-b50737ad03de
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5ad90d88-bf54-4fe4-b4c1-0b21ef99faa8
+      m_Path: <Mouse>/middleButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
   mouseRayLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  playerPointer: {fileID: 0}
