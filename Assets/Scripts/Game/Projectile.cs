@@ -10,7 +10,6 @@ namespace Game
         private IEntity target;
         private IWorldPosition position;
         private RepeatedWorldDirection direction;
-        private bool targetReached;
         [SerializeField] private float flySpeed = 3f;
 
         private void Awake()
@@ -28,7 +27,6 @@ namespace Game
         public void SetTarget(IEntity target)
         {
             this.target = target;
-            targetReached = false;
         }
 
         public void Update()
