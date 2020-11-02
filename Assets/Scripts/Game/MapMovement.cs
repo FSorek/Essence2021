@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(WorldPosition))]
 public class MapMovement : MonoBehaviour
 {
+    public float SpeedMultiplier { get; set; } = 1;
     [SerializeField] private float speed;
     private WorldPosition worldPosition;
-
     private void Awake()
     {
         worldPosition = GetComponent<WorldPosition>();
@@ -15,6 +15,6 @@ public class MapMovement : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Time.deltaTime * speed * Vector3.left, Space.Self);
+        transform.Translate(Time.deltaTime * speed * Vector3.left * SpeedMultiplier, Space.Self);
     }
 }

@@ -24,4 +24,9 @@ public class Monster : MonoBehaviour, ITakeDamage, IEntity
             OnDeath?.Invoke(this);
         }
     }
+
+    public void MultiplyMovementSpeed(float multiplier)
+    {
+        GetComponent<MapMovement>().SpeedMultiplier = multiplier;
+    }
 }

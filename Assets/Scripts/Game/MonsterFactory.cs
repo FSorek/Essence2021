@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class MonsterFactory : IEntityFactory<Monster>
 {
@@ -15,6 +16,7 @@ public class MonsterFactory : IEntityFactory<Monster>
     public void CreateMonster(Monster monsterPrefab, Vector3 spawnPosition, Transform transformParent)
     {
         var monster = Object.Instantiate(monsterPrefab, spawnPosition, Quaternion.identity, transformParent);
+        monster.MultiplyMovementSpeed(Random.Range(.8f, 1.5f));
         OnMonsterCreated?.Invoke(monster);
         monstersAlive.Add(monster);
         monster.OnDeath += MonsterOnDeath;
