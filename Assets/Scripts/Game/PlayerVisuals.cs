@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
-    public Vector3 ParticleOrigin => particleOrigin.position;
-
     [SerializeField] private Transform particleOrigin;
-    [SerializeField] private BuildingVFX[] buildingVfxs;
-    [SerializeField] private InvokeElementVFX[] invokeElementVfxes;
+    private BuildingVFX[] buildingVfxs;
+    private InvokeElementVFX[] invokeElementVfxes;
 
     private void Awake()
     {
         var playerStateMachine = FindObjectOfType<PlayerStateMachine>();
+        buildingVfxs = GetComponentsInChildren<BuildingVFX>();
+        invokeElementVfxes = GetComponentsInChildren<InvokeElementVFX>();
         playerStateMachine.OnStateEntered += PlayEffect;
         playerStateMachine.OnStateExited += StopEffect;
     }
@@ -23,11 +23,11 @@ public class PlayerVisuals : MonoBehaviour
     {
         if (state is Building building)
         {
-            buildingVfxs.First(vfx => vfx.TargetName == building.Essence).Play(building.TargetPosition);
+            buildingVfxs.FirstOrDefault(vfx => vfx.TargetName == building.Essence)?.Play(building.TargetPosition);
         }
         else if(state is InvokeElement invoke)
         {
-            invokeElementVfxes.First(vfx => vfx.TargetName == invoke.TargetElement).Play();
+            invokeElementVfxes.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Play();
         }
     }
 
@@ -35,11 +35,11 @@ public class PlayerVisuals : MonoBehaviour
     {
         if (state is Building building)
         {
-            buildingVfxs.First(vfx => vfx.TargetName == building.Essence).Stop();
+            buildingVfxs.FirstOrDefault(vfx => vfx.TargetName == building.Essence)?.Stop();
         }
         else if(state is InvokeElement invoke)
         {
-            invokeElementVfxes.First(vfx => vfx.TargetName == invoke.TargetElement).Stop();
+            invokeElementVfxes.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Stop();
         }
     }
 }
