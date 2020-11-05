@@ -9,6 +9,9 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     [SerializeField] private InputAction primaryAction;
     [SerializeField] private InputAction secondaryAction;
     [SerializeField] private InputAction invokeFireAction;
+    [SerializeField] private InputAction invokeWaterAction;
+    [SerializeField] private InputAction invokeEarthAction;
+    [SerializeField] private InputAction invokeAirAction;
     [SerializeField] private InputAction attackAction;
     public static IPlayerInput Instance { get; set; }
     public IWorldPosition WorldPointerPosition => playerPointer.Position;
@@ -55,6 +58,9 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         SecondaryActionKeyDown = ButtonPressedThisFrame(secondaryAction);
         SecondaryActionKeyUp = ButtonReleasedThisFrame(secondaryAction);
         InvokeFireDown = ButtonPressedThisFrame(invokeFireAction);
+        InvokeWaterDown = ButtonPressedThisFrame(invokeWaterAction);
+        InvokeEarthDown = ButtonPressedThisFrame(invokeEarthAction);
+        InvokeAirDown = ButtonPressedThisFrame(invokeAirAction);
         AttackActionKeyDown = ButtonPressedThisFrame(attackAction);
         AttackActionKeyUp = ButtonReleasedThisFrame(attackAction);
         MouseRayHitPoint = ReadMouseRay();

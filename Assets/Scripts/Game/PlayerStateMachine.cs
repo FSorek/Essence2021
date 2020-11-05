@@ -20,29 +20,50 @@ public class PlayerStateMachine : MonoBehaviour
         var player = GetComponent<Player>();
         var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), 1f, 1);
         var idle = new Idle();
-        var absorb = new Absorb(player, mouseOverObelisk);
+        var absorb = new Extract(player, mouseOverObelisk);
         var exude = new Exude(player, mouseOverObelisk);
         
         var placingObelisk = new PlacingObelisk(obeliskPrefab, player);
         
         var invokeFireElement = new InvokeElement(mouseOverObelisk, EssenceNames.Fire);
+        var invokeWaterElement = new InvokeElement(mouseOverObelisk, EssenceNames.Water);
+        var invokeEarthElement = new InvokeElement(mouseOverObelisk, EssenceNames.Earth);
+        var invokeAirElement = new InvokeElement(mouseOverObelisk, EssenceNames.Air);
 
         var buildingFireElement = new Building(mouseOverObelisk, EssenceNames.Fire);
-        
+        var buildingWaterElement = new Building(mouseOverObelisk, EssenceNames.Water);
+        var buildingEarthElement = new Building(mouseOverObelisk, EssenceNames.Earth);
+        var buildingAirElement = new Building(mouseOverObelisk, EssenceNames.Air);
        
         var attack = new Attack(fireAttack);
-
+        
         stateMachine.AddAnyTransition(placingObelisk, () => PlayerInput.Instance.ObeliskKeyDown);
-        stateMachine.AddAnyTransition(invokeFireElement, () => PlayerInput.Instance.InvokeFireDown && player.CurrentEssence == null);
-        
         stateMachine.AddTransition(placingObelisk, idle, () => PlayerInput.Instance.ObeliskKeyDown || placingObelisk.Finished);
-        stateMachine.AddTransition(invokeFireElement, idle, () => PlayerInput.Instance.InvokeFireDown);
-        stateMachine.AddTransition(invokeFireElement, buildingFireElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeFireElement.CanBuild);
-        stateMachine.AddTransition(buildingFireElement, invokeFireElement, () => PlayerInput.Instance.PrimaryActionKeyUp || buildingFireElement.Finished);
         
-        stateMachine.AddTransition(idle, absorb, () => PlayerInput.Instance.SecondaryActionKeyDown && player.CurrentEssence == null && absorb.CanAbsorb);
+        stateMachine.AddAnyTransition(absorb, () => PlayerInput.Instance.SecondaryActionKeyDown && player.CurrentEssence == null && absorb.CanAbsorb);
         stateMachine.AddTransition(absorb, idle, () => PlayerInput.Instance.SecondaryActionKeyUp || absorb.Finished);
         
+        stateMachine.AddAnyTransition(invokeFireElement, () => PlayerInput.Instance.InvokeFireDown && player.CurrentEssence == null);
+        stateMachine.AddAnyTransition(invokeWaterElement, () => PlayerInput.Instance.InvokeWaterDown && player.CurrentEssence == null);
+        stateMachine.AddAnyTransition(invokeEarthElement, () => PlayerInput.Instance.InvokeEarthDown && player.CurrentEssence == null);
+        stateMachine.AddAnyTransition(invokeAirElement, () => PlayerInput.Instance.InvokeAirDown && player.CurrentEssence == null);
+        
+        stateMachine.AddTransition(invokeFireElement, idle, () => PlayerInput.Instance.InvokeFireDown);
+        stateMachine.AddTransition(invokeWaterElement, idle, () => PlayerInput.Instance.InvokeWaterDown);
+        stateMachine.AddTransition(invokeEarthElement, idle, () => PlayerInput.Instance.InvokeEarthDown);
+        stateMachine.AddTransition(invokeAirElement, idle, () => PlayerInput.Instance.InvokeAirDown);
+        
+        stateMachine.AddTransition(invokeFireElement, buildingFireElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeFireElement.CanBuild);
+        stateMachine.AddTransition(invokeWaterElement, buildingWaterElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeWaterElement.CanBuild);
+        stateMachine.AddTransition(invokeEarthElement, buildingEarthElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeEarthElement.CanBuild);
+        stateMachine.AddTransition(invokeAirElement, buildingAirElement, () => PlayerInput.Instance.PrimaryActionKeyDown && invokeAirElement.CanBuild);
+        
+        stateMachine.AddTransition(buildingFireElement, invokeFireElement, () => PlayerInput.Instance.PrimaryActionKeyUp || buildingFireElement.Finished);
+        stateMachine.AddTransition(buildingWaterElement, invokeWaterElement, () => PlayerInput.Instance.PrimaryActionKeyUp || buildingWaterElement.Finished);
+        stateMachine.AddTransition(buildingEarthElement, invokeEarthElement, () => PlayerInput.Instance.PrimaryActionKeyUp || buildingEarthElement.Finished);
+        stateMachine.AddTransition(buildingAirElement, invokeAirElement, () => PlayerInput.Instance.PrimaryActionKeyUp || buildingAirElement.Finished);
+        
+       
         stateMachine.AddTransition(idle, exude, () => PlayerInput.Instance.PrimaryActionKeyDown && player.CurrentEssence != null && exude.CanExtract);
         stateMachine.AddTransition(exude, idle, () => PlayerInput.Instance.PrimaryActionKeyUp || exude.Finished);
         

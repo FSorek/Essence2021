@@ -8,12 +8,14 @@ public class PlayerVisuals : MonoBehaviour
 {
     private BuildingVFX[] buildingVfxs;
     private InvokeElementVFX[] invokeElementVfxs;
+    private ExtractVFX extractVfx;
 
     private void Awake()
     {
         var playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         buildingVfxs = GetComponentsInChildren<BuildingVFX>();
         invokeElementVfxs = GetComponentsInChildren<InvokeElementVFX>();
+        extractVfx = GetComponentInChildren<ExtractVFX>();
         playerStateMachine.OnStateEntered += PlayEffect;
         playerStateMachine.OnStateExited += StopEffect;
     }
@@ -28,6 +30,10 @@ public class PlayerVisuals : MonoBehaviour
         {
             invokeElementVfxs.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Play();
         }
+        else if (state is Extract extract)
+        {
+            extractVfx?.Play(extract.TargetPosition);
+        }
     }
 
     private void StopEffect(IState state)
@@ -39,6 +45,10 @@ public class PlayerVisuals : MonoBehaviour
         else if(state is InvokeElement invoke)
         {
             invokeElementVfxs.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Stop();
+        }
+        else if (state is Extract)
+        {
+            extractVfx?.Stop();
         }
     }
 }

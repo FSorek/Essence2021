@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -61,16 +62,20 @@ public class EssenceFactory
             essences.Add(set.Name, set.Essence);
         }
     }
+
     public Essence CreateEssence(EssenceNames name, Vector3 position)
     {
-        if (essences.ContainsKey(name))
-        {
-            var essence = Add(name);
-            essence.transform.position = position;
-            essence.transform.SetParent(parent);
-            return essence;
-        }
-        return null;
+        var essence = essences.ContainsKey(name) ? Add(name) : CreateDevEssence();
+
+        essence.transform.position = position;
+        essence.transform.SetParent(parent);
+        return essence;
+    }
+
+    private Essence CreateDevEssence()
+    {
+        var devEssence = AssetDatabase.LoadAssetAtPath<Essence>("Assets/Prefabs/Essences/DevEssence.prefab");
+        return Object.Instantiate(devEssence);
     }
 
     private Essence Add(EssenceNames name)

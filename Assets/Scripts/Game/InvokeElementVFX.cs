@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.VFX;
 
 public class InvokeElementVFX : MonoBehaviour
 {
-    public EssenceNames TargetName { get; }
+    public EssenceNames TargetName => targetName;
     [SerializeField] private EssenceNames targetName;
-    [SerializeField] private VisualEffect[] visualEffects;
+    private VisualEffect[] visualEffects;
+
+    private void Awake()
+    {
+        visualEffects = GetComponentsInChildren<VisualEffect>();
+    }
 
     public void Play()
     {

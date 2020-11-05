@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class Absorb : IState
+public class Extract : IState
 {
     private static float absorbTime = 2f;
     public bool CanAbsorb => CheckCanAbsorb();
     public bool Finished { get; private set; }
+    public Vector3 TargetPosition => cachedTarget.EssenceHolder.position;
 
     private readonly Player player;
     private readonly MouseOverSelector obeliskSelector;
@@ -12,7 +13,7 @@ public class Absorb : IState
     private Obelisk cachedTarget;
     private float timer;
 
-    public Absorb(Player player, MouseOverSelector obeliskSelector)
+    public Extract(Player player, MouseOverSelector obeliskSelector)
     {
         this.player = player;
         this.obeliskSelector = obeliskSelector;

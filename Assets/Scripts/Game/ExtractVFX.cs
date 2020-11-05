@@ -1,11 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.VFX;
 
-public class BuildingVFX : MonoBehaviour
+public class ExtractVFX : MonoBehaviour
 {
-    public EssenceNames TargetName => targetName;
-    [SerializeField] private EssenceNames targetName;
     [SerializeField] private Transform target;
     private VisualEffect[] visualEffects;
 

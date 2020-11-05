@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 83083732369a2fd4ebd09e7440057fa1
   m_SerializeEntries:
+  - m_GUID: 10b118e535ae3c14e95614288bba4b81
+    m_Address: Assets/Prefabs/Essences/DevEssence.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 23e3abadc0aca2242b70700d1d5f0d96
     m_Address: Assets/Prefabs/WorldSegment.prefab
     m_ReadOnly: 0
