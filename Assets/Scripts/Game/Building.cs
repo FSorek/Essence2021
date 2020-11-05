@@ -6,8 +6,6 @@ using Object = UnityEngine.Object;
 
 public class Building : IState
 {
-    public event Action OnBuildingStarted;
-    public event Action OnBuildingFinished;
     public bool Finished { get; private set; }
     public EssenceNames Essence => essence;
     public Vector3 TargetPosition => cachedTarget.EssenceHolder.position;
@@ -39,12 +37,10 @@ public class Building : IState
         timer = buildTime;
         cachedTarget = selectedTarget;
         Finished = false;
-        OnBuildingStarted?.Invoke();
     }
 
     public void OnExit()
     {
-        OnBuildingFinished?.Invoke();
     }
 }
 

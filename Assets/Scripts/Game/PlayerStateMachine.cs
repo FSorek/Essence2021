@@ -7,13 +7,16 @@ using UnityEngine;
 public class PlayerStateMachine : MonoBehaviour
 {
     public Type CurrentStateType => stateMachine.CurrentState.GetType();
+    public event Action<IState> OnStateEntered;
+    public event Action<IState> OnStateExited;
     private StateMachine stateMachine;
     [SerializeField] private FireEssenceAttack fireAttack;
     [SerializeField] private Obelisk obeliskPrefab;
     private void Start()
     {
         stateMachine = new StateMachine();
-        stateMachine.OnStateChanged += HandleStateChanged;
+        stateMachine.OnStateEntered += StateMachineOnOnStateEntered;
+        stateMachine.OnStateExited += StateMachineOnStateExited;
         var player = GetComponent<Player>();
         var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), 1f, 1);
         var idle = new Idle();
@@ -22,12 +25,9 @@ public class PlayerStateMachine : MonoBehaviour
         
         var placingObelisk = new PlacingObelisk(obeliskPrefab, player);
         
+        var invokeFireElement = new InvokeElement(mouseOverObelisk, EssenceNames.Fire);
+
         var buildingFireElement = new Building(mouseOverObelisk, EssenceNames.Fire);
-        
-        var invokeFireElement = new InvokeElement(mouseOverObelisk);
-        var invokeWaterElement = new InvokeElement(mouseOverObelisk);
-        var invokeEarthElement = new InvokeElement(mouseOverObelisk);
-        var invokeAirElement = new InvokeElement(mouseOverObelisk);
         
        
         var attack = new Attack(fireAttack);
@@ -50,15 +50,18 @@ public class PlayerStateMachine : MonoBehaviour
         stateMachine.AddTransition(attack, idle, () => PlayerInput.Instance.AttackActionKeyUp);
 
         stateMachine.SetState(idle);
-        
-        player.Visuals.AssignBuildingState(buildingFireElement);
     }
 
-    private void HandleStateChanged(IState obj)
+    private void StateMachineOnOnStateEntered(IState obj)
     {
-        Debug.Log(obj.GetType());
+        OnStateEntered?.Invoke(obj);
     }
 
+    private void StateMachineOnStateExited(IState obj)
+    {
+        OnStateExited?.Invoke(obj);
+    }
+    
     private void Update()
     {
         stateMachine.Tick();

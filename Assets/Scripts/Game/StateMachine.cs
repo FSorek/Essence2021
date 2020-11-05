@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StateMachine
 {
-    public event Action<IState> OnStateChanged = delegate {  };
+    public event Action<IState> OnStateEntered;
+    public event Action<IState> OnStateExited;
     public IState CurrentState => currentState;
     
     private List<StateTransition> stateTransitions = new List<StateTransition>();
@@ -55,10 +56,11 @@ public class StateMachine
         if(currentState == state) return;
         
         currentState?.OnExit();
+        OnStateExited?.Invoke(currentState);
         currentState = state;
         currentState.OnEnter();
 
-        OnStateChanged(currentState);
+        OnStateEntered?.Invoke(currentState);
     }
     
 }

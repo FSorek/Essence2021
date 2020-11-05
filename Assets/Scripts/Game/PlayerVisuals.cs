@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
@@ -9,13 +10,36 @@ public class PlayerVisuals : MonoBehaviour
 
     [SerializeField] private Transform particleOrigin;
     [SerializeField] private BuildingVFX[] buildingVfxs;
+    [SerializeField] private InvokeElementVFX[] invokeElementVfxes;
 
-    public void AssignBuildingState(Building state)
+    private void Awake()
     {
-        foreach (var vfx in buildingVfxs)
+        var playerStateMachine = FindObjectOfType<PlayerStateMachine>();
+        playerStateMachine.OnStateEntered += PlayEffect;
+        playerStateMachine.OnStateExited += StopEffect;
+    }
+
+    private void PlayEffect(IState state)
+    {
+        if (state is Building building)
         {
-            if(vfx.TargetName == state.Essence)
-                vfx.AssignBuildingState(state);
+            buildingVfxs.First(vfx => vfx.TargetName == building.Essence).Play(building.TargetPosition);
+        }
+        else if(state is InvokeElement invoke)
+        {
+            invokeElementVfxes.First(vfx => vfx.TargetName == invoke.TargetElement).Play();
+        }
+    }
+
+    private void StopEffect(IState state)
+    {
+        if (state is Building building)
+        {
+            buildingVfxs.First(vfx => vfx.TargetName == building.Essence).Stop();
+        }
+        else if(state is InvokeElement invoke)
+        {
+            invokeElementVfxes.First(vfx => vfx.TargetName == invoke.TargetElement).Stop();
         }
     }
 }
