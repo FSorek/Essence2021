@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
-    [SerializeField] private Transform particleOrigin;
     private BuildingVFX[] buildingVfxs;
     private InvokeElementVFX[] invokeElementVfxes;
 
