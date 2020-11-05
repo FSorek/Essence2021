@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerVisuals : MonoBehaviour
 {
     private BuildingVFX[] buildingVfxs;
-    private InvokeElementVFX[] invokeElementVfxes;
+    private InvokeElementVFX[] invokeElementVfxs;
 
     private void Awake()
     {
         var playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         buildingVfxs = GetComponentsInChildren<BuildingVFX>();
-        invokeElementVfxes = GetComponentsInChildren<InvokeElementVFX>();
+        invokeElementVfxs = GetComponentsInChildren<InvokeElementVFX>();
         playerStateMachine.OnStateEntered += PlayEffect;
         playerStateMachine.OnStateExited += StopEffect;
     }
@@ -26,7 +26,7 @@ public class PlayerVisuals : MonoBehaviour
         }
         else if(state is InvokeElement invoke)
         {
-            invokeElementVfxes.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Play();
+            invokeElementVfxs.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Play();
         }
     }
 
@@ -38,7 +38,7 @@ public class PlayerVisuals : MonoBehaviour
         }
         else if(state is InvokeElement invoke)
         {
-            invokeElementVfxes.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Stop();
+            invokeElementVfxs.FirstOrDefault(vfx => vfx.TargetName == invoke.TargetElement)?.Stop();
         }
     }
 }
