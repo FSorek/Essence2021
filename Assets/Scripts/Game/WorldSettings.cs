@@ -8,13 +8,18 @@ public class WorldSettings : MonoBehaviour
     public static MonsterFactory MonsterFactory { get; } = new MonsterFactory();
 
     public static WorldPointer ActivePointer => activePointer;
+    public static EssenceFactory EssenceFactory => essenceFactory;
+
     [SerializeField] private WorldSegment segmentPrefab;
     [SerializeField][Min(3)] private int startingSegments = 3;
+    [SerializeField] private EssenceSet[] essenceSets;
     private static WorldPointer activePointer;
+    private static EssenceFactory essenceFactory;
 
     private void Awake()
     {
         activePointer = FindObjectOfType<WorldPointer>();
+        essenceFactory = new EssenceFactory(essenceSets, transform);
     }
 
     private void OnEnable()

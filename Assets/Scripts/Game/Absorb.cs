@@ -8,7 +8,6 @@ public class Absorb : IState
 
     private readonly Player player;
     private readonly MouseOverSelector obeliskSelector;
-    private readonly LineRenderer absorbLine;
 
     private Obelisk cachedTarget;
     private float timer;
@@ -17,13 +16,11 @@ public class Absorb : IState
     {
         this.player = player;
         this.obeliskSelector = obeliskSelector;
-        this.absorbLine = player.AbsorbLine;
     }
 
     public void Tick()
     {
         timer -= Time.deltaTime;
-        absorbLine.SetPosition(0, player.WorldPointer.ParticlePosition);
         if(timer > 0)
             return;
         var extractedEssence = cachedTarget.ExtractEssence();
@@ -34,15 +31,12 @@ public class Absorb : IState
 
     public void OnEnter()
     {
-        absorbLine.enabled = true;
-        absorbLine.SetPosition(1, cachedTarget.transform.position);
         Finished = false;
         timer = absorbTime;
     }
 
     public void OnExit()
     {
-        absorbLine.enabled = false;
     }
 
     private bool CheckCanAbsorb()
@@ -77,7 +71,6 @@ public class Exude : IState
 
     private readonly Player player;
     private readonly MouseOverSelector obeliskSelector;
-    private readonly LineRenderer extractLine;
 
     private Obelisk cachedTarget;
     private float timer;
@@ -86,13 +79,11 @@ public class Exude : IState
     {
         this.player = player;
         this.obeliskSelector = obeliskSelector;
-        this.extractLine = player.ExudeLine;
     }
 
     public void Tick()
     {
         timer -= Time.deltaTime;
-        extractLine.SetPosition(0, player.WorldPointer.ParticlePosition);
         if(timer > 0)
             return;
         var extractedEssence = player.ExtractEssence();
@@ -103,15 +94,12 @@ public class Exude : IState
 
     public void OnEnter()
     {
-        extractLine.enabled = true;
-        extractLine.SetPosition(1, cachedTarget.transform.position);
         Finished = false;
         timer = extractTime;
     }
 
     public void OnExit()
     {
-        extractLine.enabled = false;
     }
 
     private bool CheckCanExtract()

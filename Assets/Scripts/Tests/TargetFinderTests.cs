@@ -75,7 +75,7 @@ namespace Tests
         {
             IWorldGenerator generator = Substitute.For<IWorldGenerator>();
             var monsterFactory = Substitute.For<IEntityFactory<IEntity>>();
-            monsterFactory.GetAliveEntities().Returns(targets);
+            monsterFactory.GetActiveEntities().Returns(targets);
             generator.MapLength.Returns(100);
             var targetFinder = new TargetFinder<IEntity>(origin, range, generator, monsterFactory);
 

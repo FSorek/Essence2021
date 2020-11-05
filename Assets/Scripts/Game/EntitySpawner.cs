@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class MonsterSpawner : MonoBehaviour
+public class EntitySpawner : MonoBehaviour
 {
     [SerializeField] private Monster monsterPrefab;
     [SerializeField][Min(.5f)] private float spawningFrequency;
     [SerializeField] private Collider spawnArea;
-    private MonsterFactory factory;
+    private IEntityFactory<Monster> factory;
 
     private void Start()
     {
@@ -19,6 +19,6 @@ public class MonsterSpawner : MonoBehaviour
         var spawnPointZ = transform.position.z - spawnArea.bounds.size.z/2 + Random.Range(0, spawnArea.bounds.size.z);
         var spawnPosition = new Vector3(spawnPointX, transform.position.y, spawnPointZ);
 
-        factory.CreateMonster(monsterPrefab, spawnPosition, spawnArea.transform.parent);
+        factory.CreateEntity(monsterPrefab, spawnPosition, spawnArea.transform.parent);
     }
 }

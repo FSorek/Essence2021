@@ -33,7 +33,7 @@ public class TargetFinder<T> where T : class, IEntity
     {
         T closestPosition = null;
         float distance = Mathf.Infinity;
-        foreach (var entity in factory.GetAliveEntities())
+        foreach (var entity in factory.GetActiveEntities())
         {
             var monsterDistance = Mathf.Abs(entity.Position.GlobalPosition - origin.GlobalPosition);
             var reapeatDistance = Mathf.Abs(entity.Position.GlobalPosition + worldGenerator.MapLength - origin.GlobalPosition);
@@ -50,5 +50,6 @@ public class TargetFinder<T> where T : class, IEntity
 
 public interface IEntityFactory<T> where T : class, IEntity
 {
-    IEnumerable<T> GetAliveEntities();
+    IEnumerable<T> GetActiveEntities();
+    T CreateEntity(T prefab, Vector3 spawnPosition, Transform parent);
 }

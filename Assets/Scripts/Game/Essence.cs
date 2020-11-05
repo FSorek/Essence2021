@@ -3,8 +3,9 @@ using Game;
 using UnityEngine;
 
 [RequireComponent(typeof(WorldPosition))]
-public class Essence : MonoBehaviour
+public class Essence : MonoBehaviour, IEntity
 {
+    public IWorldPosition Position => position;
     [SerializeField] private float range;
     [SerializeField] private float attackDelay;
     [SerializeField] private Projectile projectile;
@@ -12,6 +13,7 @@ public class Essence : MonoBehaviour
     private TargetFinder<Monster> targetFinder;
     private bool CanFireProjectile => targetFinder.CurrentTarget != null && shotTimer <= 0;
     private float shotTimer;
+
 
     private void Awake()
     {

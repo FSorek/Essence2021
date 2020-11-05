@@ -183,6 +183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentPrefab: {fileID: 469219616447941059, guid: 23e3abadc0aca2242b70700d1d5f0d96, type: 3}
   startingSegments: 3
+  essenceSets:
+  - Name: 0
+    Essence: {fileID: 6427729413386330711, guid: 6a9142f0841f2d444a0cc1494fd98d15, type: 3}
 --- !u!1 &232465404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,13 +1249,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7065538388376810266, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
-      propertyPath: radius
-      value: 3
+    - target: {fileID: 4459939890796697081, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
+      propertyPath: m_InitialEventName
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7065538388376810266, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
-      propertyPath: tickFrequency
-      value: 0.5
+    - target: {fileID: 4459939890796697081, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255099594582251941, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8776125311009467950, guid: beade455b7b94134a8cb2c64a5a5c89d, type: 3}
       propertyPath: m_Name
