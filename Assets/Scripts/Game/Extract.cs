@@ -22,12 +22,12 @@ public class Extract : IState
     public void Tick()
     {
         timer -= Time.deltaTime;
-        if(timer > 0)
+        if(timer > 0 || Finished)
             return;
+        Finished = true;
         var extractedEssence = cachedTarget.ExtractEssence();
         player.AddEssence(extractedEssence);
         timer = absorbTime;
-        Finished = true;
     }
 
     public void OnEnter()
@@ -69,6 +69,7 @@ public class Exude : IState
     private static float extractTime = 2f;
     public bool CanExtract => CheckCanExtract();
     public bool Finished { get; private set; }
+    public Vector3 TargetPosition => cachedTarget.EssenceHolder.position;
 
     private readonly Player player;
     private readonly MouseOverSelector obeliskSelector;

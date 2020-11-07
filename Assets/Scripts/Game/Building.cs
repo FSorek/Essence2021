@@ -28,8 +28,8 @@ public class Building : IState
             return;
         var spawnPosition = PlayerInput.Instance.MouseRayHitPoint;
         var createdEssence = WorldSettings.EssenceFactory.CreateEssence(essence, spawnPosition);
-        cachedTarget.AddEssence(createdEssence);
         Finished = true;
+        cachedTarget.AddEssence(createdEssence);
     }
 
     public void OnEnter()

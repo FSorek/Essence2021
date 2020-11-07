@@ -3,21 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerVisuals : MonoBehaviour
 {
     private BuildingVFX[] buildingVfxs;
     private InvokeElementVFX[] invokeElementVfxs;
     private ExtractVFX extractVfx;
+    private ExudeVFX exudeVfx;
+    [SerializeField] private VisualEffect holdingEssence;
 
     private void Awake()
     {
         var playerStateMachine = FindObjectOfType<PlayerStateMachine>();
+        var player = FindObjectOfType<Player>();
         buildingVfxs = GetComponentsInChildren<BuildingVFX>();
         invokeElementVfxs = GetComponentsInChildren<InvokeElementVFX>();
         extractVfx = GetComponentInChildren<ExtractVFX>();
+        exudeVfx = GetComponentInChildren<ExudeVFX>();
         playerStateMachine.OnStateEntered += PlayEffect;
         playerStateMachine.OnStateExited += StopEffect;
+        player.OnEssenceExtracted += PlayHoldingEssenceEffect;
+        player.OnEssenceLost += StopHoldingEssenceEffect;
+    }
+
+    private void StopHoldingEssenceEffect()
+    {
+        holdingEssence.Stop();
+    }
+
+    private void PlayHoldingEssenceEffect()
+    {
+        holdingEssence.Play();
     }
 
     private void PlayEffect(IState state)
@@ -34,6 +51,10 @@ public class PlayerVisuals : MonoBehaviour
         {
             extractVfx?.Play(extract.TargetPosition);
         }
+        else if (state is Exude exude)
+        {
+            exudeVfx?.Play(exude.TargetPosition);
+        }
     }
 
     private void StopEffect(IState state)
@@ -49,6 +70,10 @@ public class PlayerVisuals : MonoBehaviour
         else if (state is Extract)
         {
             extractVfx?.Stop();
+        }
+        else if (state is Exude)
+        {
+            exudeVfx?.Stop();
         }
     }
 }

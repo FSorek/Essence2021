@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerInput : MonoBehaviour, IPlayerInput
 {
+    [SerializeField] private bool cursorLocked;
     [SerializeField] private InputAction obeliskAction;
     [SerializeField] private InputAction primaryAction;
     [SerializeField] private InputAction secondaryAction;
@@ -48,6 +49,9 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         playerCamera = Camera.main;
         if (playerPointer == null)
             playerPointer = FindObjectOfType<WorldPointer>();
+
+        if (cursorLocked)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
