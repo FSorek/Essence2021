@@ -14,6 +14,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     [SerializeField] private InputAction invokeEarthAction;
     [SerializeField] private InputAction invokeAirAction;
     [SerializeField] private InputAction attackAction;
+    [SerializeField] private InputAction jumpLeftAction;
+    [SerializeField] private InputAction jumpRightAction;
     public static IPlayerInput Instance { get; set; }
     public IWorldPosition WorldPointerPosition => playerPointer.Position;
     public float MovementInput { get; private set; }
@@ -30,6 +32,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public bool SecondaryActionKeyUp { get; private set; }
     public bool AttackActionKeyDown { get; private set; }
     public bool AttackActionKeyUp { get; private set; }
+    public bool JumpLeftKeyDown { get; private set; }
+    public bool JumpRightKeyDown { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
@@ -68,6 +72,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
         AttackActionKeyDown = ButtonPressedThisFrame(attackAction);
         AttackActionKeyUp = ButtonReleasedThisFrame(attackAction);
         MouseRayHitPoint = ReadMouseRay();
+        JumpLeftKeyDown = ButtonPressedThisFrame(jumpLeftAction);
+        JumpRightKeyDown = ButtonPressedThisFrame(jumpRightAction);
     }
 
     private Vector3 ReadMouseRay()
@@ -123,4 +129,6 @@ public interface IPlayerInput
     bool SecondaryActionKeyUp { get; }
     bool AttackActionKeyDown { get; }
     bool AttackActionKeyUp { get; }
+    bool JumpLeftKeyDown { get; }
+    bool JumpRightKeyDown { get; }
 }

@@ -41,3 +41,4 @@ public class WorldPointer : MonoBehaviour
         transform.position = new Vector3(clampedPosition.x, transform.position.y, clampedPosition.z);
     }
 }
+

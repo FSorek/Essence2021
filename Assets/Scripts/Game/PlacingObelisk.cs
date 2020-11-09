@@ -34,7 +34,7 @@ public class PlacingObelisk : IState
 
     public void OnEnter()
     {
-        currentInstance = Object.Instantiate(prefab).transform;
+        currentInstance = Object.Instantiate(prefab, new Vector3(0,-100,0), Quaternion.identity).transform;
         Finished = false;
     }
 

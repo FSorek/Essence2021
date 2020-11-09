@@ -4,6 +4,7 @@ using Object = UnityEngine.Object;
 
 public class WorldSettings : MonoBehaviour
 {
+    public static event Action OnWorldInitialized;
     public static WorldGenerator WorldGenerator { get; } = new WorldGenerator();
     public static MonsterFactory MonsterFactory { get; } = new MonsterFactory();
 
@@ -40,5 +41,6 @@ public class WorldSettings : MonoBehaviour
             var segment = WorldGenerator.CreateSegment(segmentPrefab);
             segment.transform.SetParent(transform);
         }
+        OnWorldInitialized?.Invoke();
     }
 }

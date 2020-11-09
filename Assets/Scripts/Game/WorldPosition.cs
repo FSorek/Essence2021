@@ -9,12 +9,20 @@ public class WorldPosition : MonoBehaviour, IWorldPosition
     public float GlobalPosition { get; private set; }
     public float SegmentPosition { get; private set; }
     public WorldSegment CurrentSegment { get; private set; }
+    public WorldSegment LeftSegment { get; private set; }
+    public WorldSegment RightSegment { get; private set; }
     private WorldGenerator worldGenerator;
     private void OnEnable()
     {
         worldGenerator = WorldSettings.WorldGenerator;
+        WorldSettings.OnWorldInitialized += WorldSettingsOnWorldInitialized;
+    }
+
+    private void WorldSettingsOnWorldInitialized()
+    {
         CurrentSegment = worldGenerator.GetSegmentAt(transform.position.x);
-        UpdatePosition();
+        LeftSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
+        RightSegment = worldGenerator.GetNextSegment(CurrentSegment);
     }
 
     private void Update()
@@ -26,21 +34,22 @@ public class WorldPosition : MonoBehaviour, IWorldPosition
     {
         if (CurrentSegment == null)
         {
-            CurrentSegment = worldGenerator.GetSegmentAt(transform.position.x);
+            WorldSettingsOnWorldInitialized();
             return;
         }
-
         if (SegmentPosition > CurrentSegment.Length)
         {
-            var previousSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
-            OnSegmentChanged?.Invoke(previousSegment);
-            CurrentSegment = previousSegment;
+            OnSegmentChanged?.Invoke(LeftSegment);
+            RightSegment = CurrentSegment;
+            CurrentSegment = LeftSegment;
+            LeftSegment = worldGenerator.GetPreviousSegment(CurrentSegment);
         }
         else if (SegmentPosition < 0)
         {
-            var nextSegment = worldGenerator.GetNextSegment(CurrentSegment);
-            OnSegmentChanged?.Invoke(nextSegment);
-            CurrentSegment = nextSegment;
+            OnSegmentChanged?.Invoke(RightSegment);
+            LeftSegment = CurrentSegment;
+            CurrentSegment = RightSegment;
+            RightSegment = worldGenerator.GetNextSegment(CurrentSegment);
         }
 
         SegmentPosition = transform.InverseTransformPoint(CurrentSegment.transform.position).x;
@@ -54,5 +63,6 @@ public interface IWorldPosition
     float GlobalPosition { get;  }
     float SegmentPosition { get;  }
     WorldSegment CurrentSegment { get;  }
-
+    WorldSegment LeftSegment { get; }
+    WorldSegment RightSegment { get; }
 }

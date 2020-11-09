@@ -89,25 +89,6 @@ public class PlayerStateMachine : MonoBehaviour
     }
 }
 
-public class BuildingData : ScriptableObject
-{
-    public MouseOverSelector ObeliskSelector => obeliskSelector;
-    public Essence EssencePrefab => essencePrefab;
-    
-    private const float selectorRadius = 1f;
-    private const int targetCap = 1;
-    [SerializeField] private Essence essencePrefab;
-    [SerializeField] private EssenceNames essenceName;
-    private MouseOverSelector obeliskSelector;
-    private void Awake()
-    {
-        if (obeliskSelector != null) 
-            return;
-        
-        var obeliskLayer = LayerMask.GetMask("Obelisk");
-        obeliskSelector = new MouseOverSelector(obeliskLayer, selectorRadius, targetCap);
-    }
-}
 public class Idle : IState
 {
     public void Tick()
@@ -130,8 +111,9 @@ public interface IState
 }
 public enum EssenceNames
 {
-    Fire,
-    Water,
-    Earth,
-    Air,
+    Null = 0,
+    Fire = 1,
+    Water = 2,
+    Earth = 3,
+    Air = 4,
 }

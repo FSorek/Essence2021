@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
 public class Building : IState
@@ -65,21 +64,16 @@ public class EssenceFactory
 
     public Essence CreateEssence(EssenceNames name, Vector3 position)
     {
-        var essence = essences.ContainsKey(name) ? Add(name) : CreateDevEssence();
+        var essence = Add(name);
 
         essence.transform.position = position;
         essence.transform.SetParent(parent);
         return essence;
     }
 
-    private Essence CreateDevEssence()
-    {
-        var devEssence = AssetDatabase.LoadAssetAtPath<Essence>("Assets/Prefabs/Essences/DevEssence.prefab");
-        return Object.Instantiate(devEssence);
-    }
-
     private Essence Add(EssenceNames name)
     {
+        if (!essences.ContainsKey(name)) name = EssenceNames.Null;
         return Object.Instantiate(essences[name]);
     }
 }

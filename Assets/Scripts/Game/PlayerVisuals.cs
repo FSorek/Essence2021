@@ -12,6 +12,7 @@ public class PlayerVisuals : MonoBehaviour
     private ExtractVFX extractVfx;
     private ExudeVFX exudeVfx;
     [SerializeField] private VisualEffect holdingEssence;
+    [SerializeField] private VisualEffect placingObeliskVfx;
 
     private void Awake()
     {
@@ -55,6 +56,10 @@ public class PlayerVisuals : MonoBehaviour
         {
             exudeVfx?.Play(exude.TargetPosition);
         }
+        else if (state is PlacingObelisk)
+        {
+            placingObeliskVfx.Play();
+        }
     }
 
     private void StopEffect(IState state)
@@ -74,6 +79,10 @@ public class PlayerVisuals : MonoBehaviour
         else if (state is Exude)
         {
             exudeVfx?.Stop();
+        }
+        else if (state is PlacingObelisk)
+        {
+            placingObeliskVfx.Stop();
         }
     }
 }

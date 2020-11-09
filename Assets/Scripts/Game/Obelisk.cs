@@ -23,6 +23,7 @@ public class Obelisk : MonoBehaviour, IEssenceHolder
         CurrentEssence = essence;
         essence.transform.position = EssenceHolder.position;
         CurrentEssence.gameObject.SetActive(true);
+        CurrentEssence.transform.SetParent(EssenceHolder);
     }
 
     public Essence ExtractEssence()
