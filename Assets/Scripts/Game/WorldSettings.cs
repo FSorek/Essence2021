@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class WorldSettings : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class WorldSettings : MonoBehaviour
     public static WorldPointer ActivePointer => activePointer;
     public static EssenceFactory EssenceFactory => essenceFactory;
 
-    [SerializeField] private WorldSegment segmentPrefab;
+    [SerializeField] private WorldSegment[] segmentPrefabs;
     [SerializeField][Min(3)] private int startingSegments = 3;
     [SerializeField] private EssenceSet[] essenceSets;
     private static WorldPointer activePointer;
@@ -38,9 +39,16 @@ public class WorldSettings : MonoBehaviour
     {
         for (int i = 0; i < startingSegments; i++)
         {
-            var segment = WorldGenerator.CreateSegment(segmentPrefab);
+            var randomSegmentPrefab = GetRandomSegment();
+            var segment = WorldGenerator.CreateSegment(randomSegmentPrefab);
             segment.transform.SetParent(transform);
         }
         OnWorldInitialized?.Invoke();
+    }
+
+    private WorldSegment GetRandomSegment()
+    {
+        int randomIndex = Random.Range(0, segmentPrefabs.Length - 1);
+        return segmentPrefabs[randomIndex];
     }
 }

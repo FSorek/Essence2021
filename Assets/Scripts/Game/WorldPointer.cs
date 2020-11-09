@@ -29,6 +29,7 @@ public class WorldPointer : MonoBehaviour
     {
         var pointerMovement = sensitivity * Time.deltaTime * playerInput.PointerMovement;
         transform.Translate(new Vector3(pointerMovement.x, 0, pointerMovement.y));
+        Debug.Log($"{pointerMovement} | {playerInput.PointerMovement}");
         ClampPosition();
     }
 
