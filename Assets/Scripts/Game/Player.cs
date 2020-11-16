@@ -5,11 +5,9 @@ public class Player : MonoBehaviour, IEssenceHolder
 {
     public event Action OnEssenceExtracted;
     public event Action OnEssenceLost;
-    public WorldPointer WorldPointer => worldPointer;
     public PlayerVisuals Visuals { get; private set; }
     public Essence CurrentEssence { get; private set; }
     public SegmentColliderTracker ColliderTracker { get; private set; }
-    [SerializeField] private WorldPointer worldPointer;
 
     private void Awake()
     {
