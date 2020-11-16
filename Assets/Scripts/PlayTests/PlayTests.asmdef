@@ -1,13 +1,12 @@
 {
-    "name": "Tests",
+    "name": "PlayTests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Game"
+        "Game",
+        "Unity.Addressables"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

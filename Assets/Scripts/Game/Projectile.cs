@@ -31,8 +31,11 @@ namespace Game
 
         public void Update()
         {
-            if(target == null)
+            if (target == null)
+            {
+                gameObject.SetActive(false);
                 return;
+            }
             
             var directionThisFrame = direction.GetDirection(position, target.Position, .2f);
             var distanceThisFrame = flySpeed * Time.deltaTime;

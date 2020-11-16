@@ -47,7 +47,7 @@ public class WorldGenerator : IWorldGenerator
     {
         var previousIndex = segments.IndexOf(segment) - 1;
         if (previousIndex < 0)
-            return segments.Last();
+            return segments.LastOrDefault();
         return segments[previousIndex];
     }
 
@@ -55,7 +55,7 @@ public class WorldGenerator : IWorldGenerator
     {
         var nextIndex = segments.IndexOf(segment) + 1;
         if (nextIndex >= segments.Count)
-            return segments.First();
+            return segments.FirstOrDefault();
         return segments[nextIndex];
     }
 

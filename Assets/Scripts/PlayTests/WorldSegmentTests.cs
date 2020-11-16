@@ -38,7 +38,7 @@ namespace Tests
         
         private WorldSegment GetWorldSegment()
         {
-            var prefab = AssetDatabase.LoadAssetAtPath<WorldSegment>("Assets/Prefabs/WorldSegment.prefab");
+            var prefab = AssetDatabase.LoadAssetAtPath<WorldSegment>("Assets/Prefabs/World/WorldSegment.prefab");
             return Object.Instantiate(prefab);
         }
         

@@ -50,7 +50,7 @@ namespace Tests
         }
         private PlayerStateMachine GetPlayer()
         {
-            var player = AssetDatabase.LoadAssetAtPath<PlayerStateMachine>("Assets/Prefabs/Player.prefab");
+            var player = AssetDatabase.LoadAssetAtPath<PlayerStateMachine>("Assets/Prefabs/Player/Player.prefab");
             return Object.Instantiate(player);
         }
     }
