@@ -34,18 +34,22 @@ namespace Game
             if(target == null)
                 return;
             
-            var directionThisFrame = direction.GetDirection(position, target.Position);
+            var directionThisFrame = direction.GetDirection(position, target.Position, .2f);
             var distanceThisFrame = flySpeed * Time.deltaTime;
             if (directionThisFrame.magnitude <= distanceThisFrame)
             {
-                OnTargetHit?.Invoke(target);
-                target = null;
-                Invoke(nameof(Disable), 2f);
+                HitTarget();
                 return;
             }
             transform.localPosition += directionThisFrame.normalized * distanceThisFrame;
         }
 
+        private void HitTarget()
+        {
+            Invoke(nameof(Disable), 2f);
+            OnTargetHit?.Invoke(target);
+            target = null;
+        }
         private void Disable()
         {
             gameObject.SetActive(false);

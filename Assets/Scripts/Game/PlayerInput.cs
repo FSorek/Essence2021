@@ -34,9 +34,12 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public bool AttackActionKeyUp { get; private set; }
     public bool JumpLeftKeyDown { get; private set; }
     public bool JumpRightKeyDown { get; private set; }
+    public float CameraZoomInput { get; private set; }
 
     public void UpdateMovement(InputAction.CallbackContext context) => MovementInput = context.ReadValue<float>();
     public void UpdatePointerMovement(InputAction.CallbackContext context) => PointerMovement = context.ReadValue<Vector2>();
+    public void UpdateZoomInput(InputAction.CallbackContext context) => CameraZoomInput = context.ReadValue<float>();
+
     [SerializeField] private LayerMask mouseRayLayerMask;
     [SerializeField] private WorldPointer playerPointer;
     private Camera playerCamera;
@@ -131,4 +134,5 @@ public interface IPlayerInput
     bool AttackActionKeyUp { get; }
     bool JumpLeftKeyDown { get; }
     bool JumpRightKeyDown { get; }
+    float CameraZoomInput { get; }
 }

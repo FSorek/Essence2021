@@ -58,18 +58,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8a0bf3a3-d52b-4d68-9268-f8bf212907fc
-    m_ActionName: Basic Actions/Attack[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3d4f41bd-9d36-444e-baee-22e4dafa90ec
-    m_ActionName: Basic Actions/Absorb[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7e429610-3516-4627-a452-a0d6e452edea
-    m_ActionName: Basic Actions/Exude[/Mouse/leftButton]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 327460943384327302}
         m_TargetAssemblyTypeName: PlayerInput, Game
@@ -86,30 +74,6 @@ MonoBehaviour:
     m_ActionId: 4fe40783-7355-4037-aab7-2666032042e9
     m_ActionName: Basic Actions/Movement[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 45c8828e-0f6a-494d-b822-71d29bf1eddf
-    m_ActionName: Basic Actions/Cancel[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 452347e0-e085-4594-aeac-e3a00ca866a3
-    m_ActionName: Basic Actions/Obelisk[/Keyboard/5]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e3ca4dda-80f2-4a36-a10c-5405c2335891
-    m_ActionName: Basic Actions/Air[/Keyboard/4]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 690ae6cc-3b3c-42ab-a9c8-34cbcd2e8eb2
-    m_ActionName: Basic Actions/Earth[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 12f3e205-9dc7-4d38-bb4f-072a0ea8261a
-    m_ActionName: Basic Actions/Water[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9925f374-3714-43be-8a8f-57429c3f5682
-    m_ActionName: Basic Actions/Fire[/Keyboard/1]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 327460943384327302}
         m_TargetAssemblyTypeName: PlayerInput, Game
@@ -125,6 +89,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dbfff800-b9ad-4c12-8aa5-93fd01b8fc43
     m_ActionName: Basic Actions/Pointer[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 327460943384327302}
+        m_TargetAssemblyTypeName: PlayerInput, Game
+        m_MethodName: UpdateZoomInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f9e1aba0-9b5b-4c6f-92db-066d2ec23970
+    m_ActionName: Basic Actions/CameraZoom[/Keyboard/s,/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Basic Actions
@@ -142,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8e7cc823624aa7894d86d1d309aca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorLocked: 1
   obeliskAction:
     m_Name: Obelisk
     m_Type: 1
@@ -206,6 +187,54 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Invoke Fire
       m_Flags: 0
+  invokeWaterAction:
+    m_Name: Invoke Water
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 2062710a-9e88-45fe-a60f-91eddba61a6f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b1ebe3e3-c8f7-4ad1-830d-7ab9df79b89a
+      m_Path: <Keyboard>/2
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Invoke Water
+      m_Flags: 0
+  invokeEarthAction:
+    m_Name: Invoke Earth
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 26793355-6570-48d5-a12e-b10967ff73e4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9a9fa56d-692f-425b-a4c7-f1fa2327fd17
+      m_Path: <Keyboard>/3
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Invoke Earth
+      m_Flags: 0
+  invokeAirAction:
+    m_Name: Invoke Air
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: b995e173-1e2f-450e-8622-f8ef5844a773
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d3381a29-da1e-43b7-8e88-2a76132d43ab
+      m_Path: <Keyboard>/4
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Invoke Air
+      m_Flags: 0
   attackAction:
     m_Name: Attack
     m_Type: 1
@@ -221,6 +250,38 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Attack
+      m_Flags: 0
+  jumpLeftAction:
+    m_Name: Jump Left
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 8eee08f1-6fb8-46b6-8500-2ed445afdc0a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fa737cf0-356a-4f89-9b90-3d13c6f612bf
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Left
+      m_Flags: 0
+  jumpRightAction:
+    m_Name: Jump Right
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 8e80c5ce-5407-405e-b810-fce714910f1f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: eecaa97c-da5b-4934-8dd7-23e11dcb581a
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Right
       m_Flags: 0
   mouseRayLayerMask:
     serializedVersion: 2

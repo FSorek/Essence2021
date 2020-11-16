@@ -14,175 +14,23 @@
                     "interactions": ""
                 },
                 {
-                    "name": "BonusAction",
-                    "type": "Button",
-                    "id": "8a0bf3a3-d52b-4d68-9268-f8bf212907fc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "SecondaryAction",
-                    "type": "Button",
-                    "id": "3d4f41bd-9d36-444e-baee-22e4dafa90ec",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "PrimaryAction",
-                    "type": "Button",
-                    "id": "7e429610-3516-4627-a452-a0d6e452edea",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "45c8828e-0f6a-494d-b822-71d29bf1eddf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Obelisk",
-                    "type": "Value",
-                    "id": "452347e0-e085-4594-aeac-e3a00ca866a3",
-                    "expectedControlType": "Integer",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Air",
-                    "type": "Button",
-                    "id": "e3ca4dda-80f2-4a36-a10c-5405c2335891",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Earth",
-                    "type": "Button",
-                    "id": "690ae6cc-3b3c-42ab-a9c8-34cbcd2e8eb2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Water",
-                    "type": "Button",
-                    "id": "12f3e205-9dc7-4d38-bb4f-072a0ea8261a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "9925f374-3714-43be-8a8f-57429c3f5682",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Pointer",
                     "type": "Value",
                     "id": "dbfff800-b9ad-4c12-8aa5-93fd01b8fc43",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CameraZoom",
+                    "type": "Value",
+                    "id": "f9e1aba0-9b5b-4c6f-92db-066d2ec23970",
+                    "expectedControlType": "Double",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "e97c87a0-3aab-4e8f-b084-68c7e8f6de71",
-                    "path": "<Mouse>/middleButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "BonusAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5dbb563a-645f-45ff-b855-608143329700",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SecondaryAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6bca154e-a8a3-4824-b5b4-710f1cbefb39",
-                    "path": "<Mouse>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PrimaryAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "88c4bb69-66fe-40de-b851-401f0041ff14",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0da7c6e9-e584-4280-8800-2eac2b1080a0",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Water",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6023c8b5-72cc-4ecb-9b49-8306216eefd1",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Earth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3dfb74d4-3d47-440c-a3e1-3f228247443c",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Air",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2fbf5993-0745-420b-9363-7e15e4745280",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Obelisk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "1D Axis",
                     "id": "71212765-ca4f-4057-8ebd-b9f43b0a9dd9",
@@ -218,17 +66,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3bb0d1a6-45dd-4372-95b4-5adffa64da30",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "bf0113cb-e455-48b0-ae47-30f95233001d",
                     "path": "<Mouse>/delta",
                     "interactions": "",
@@ -237,6 +74,39 @@
                     "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "3d8fde34-50d2-46ca-9267-72727d96aed4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "0fee82a4-abcc-4ab4-bcbf-f0edfa27c2cf",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4a65bc32-bce5-4c37-99ce-54bdd7fbe43b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
