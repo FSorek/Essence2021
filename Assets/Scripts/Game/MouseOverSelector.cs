@@ -4,29 +4,32 @@ using System.Linq;
 using UnityEngine;
 public class MouseOverSelector
 {
-    public int TargetsSize { get; private set; }
-    private readonly float rayRadius;
-    private readonly LayerMask layerMask;
-    private readonly Collider[] targets;
+    private readonly ISelectionStrategy selectionStrategy;
+    private readonly int targetCap;
+    private Collider[] targets;
 
-    public MouseOverSelector(LayerMask layerMask, float radius, int targetCap)
+    public MouseOverSelector(ISelectionStrategy selectionStrategy, int targetCap)
     {
-        this.layerMask = layerMask;
-        targets = new Collider[targetCap];
-        rayRadius = radius;
+        this.selectionStrategy = selectionStrategy;
+        this.targetCap = targetCap;
     }
 
     public Collider[] GetAllTargets()
     {
-        TargetsSize = Physics.OverlapCapsuleNonAlloc(WorldSettings.ActivePointer.transform.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, targets, layerMask);
+        targets = selectionStrategy.GetTargets().Take(targetCap).ToArray();
         return targets;
     }
     public Collider GetTarget(Func<Collider, bool> filter = null)
     {
-        TargetsSize = Physics.OverlapCapsuleNonAlloc(WorldSettings.ActivePointer.transform.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, targets, layerMask);
-        if (TargetsSize <= 0)
+        targets = selectionStrategy.GetTargets();
+        if (targets.Length <= 0)
             return null;
         Collider target = filter != null ? targets.FirstOrDefault(filter.Invoke) : targets.FirstOrDefault();
         return target;
     }
+}
+
+public interface ISelectionStrategy
+{
+    Collider[] GetTargets();
 }

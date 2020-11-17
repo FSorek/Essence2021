@@ -14,7 +14,8 @@ public class FireEssenceAttack : MonoBehaviour
 
     private void Awake()
     {
-        enemySelector = new MouseOverSelector(targetMask, radius, targetCap);
+        var enemySelection = new PhysicsLayerStrategy(targetMask, radius);
+        enemySelector = new MouseOverSelector(enemySelection, targetCap);
         childVisuals = GetComponentsInChildren<ParticleSystem>();
     }
 
@@ -40,9 +41,8 @@ public class FireEssenceAttack : MonoBehaviour
         }
 
         var enemies = enemySelector.GetAllTargets();
-        for(int i = 0; i < enemySelector.TargetsSize; i++)
+        foreach (var enemy in enemies)
         {
-            var enemy = enemies[i];
             var damageable = enemy.GetComponent<ITakeDamage>();
             if(damageable == null)
                 continue;

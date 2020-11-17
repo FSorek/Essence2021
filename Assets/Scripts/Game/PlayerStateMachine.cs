@@ -18,7 +18,8 @@ public class PlayerStateMachine : MonoBehaviour
         stateMachine.OnStateEntered += StateMachineOnOnStateEntered;
         stateMachine.OnStateExited += StateMachineOnStateExited;
         var player = GetComponent<Player>();
-        var mouseOverObelisk = new MouseOverSelector(LayerMask.GetMask("Obelisk"), 1f, 1);
+        var obeliskSelector = new PhysicsLayerStrategy(LayerMask.GetMask("Obelisk"), 1f);
+        var mouseOverObelisk = new MouseOverSelector(obeliskSelector, 1);
         var idle = new Idle();
         var absorb = new Extract(player, mouseOverObelisk);
         var exude = new Exude(player, mouseOverObelisk);
@@ -87,33 +88,4 @@ public class PlayerStateMachine : MonoBehaviour
     {
         stateMachine.Tick();
     }
-}
-
-public class Idle : IState
-{
-    public void Tick()
-    {
-    }
-
-    public void OnEnter()
-    {
-    }
-
-    public void OnExit()
-    {
-    }
-}
-public interface IState
-{
-    void Tick();
-    void OnEnter();
-    void OnExit();
-}
-public enum EssenceNames
-{
-    Null = 0,
-    Fire = 1,
-    Water = 2,
-    Earth = 3,
-    Air = 4,
 }
