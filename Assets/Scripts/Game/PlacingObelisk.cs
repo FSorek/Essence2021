@@ -5,7 +5,7 @@ public class PlacingObelisk : IState
     public bool Finished { get; private set; }
     private readonly Obelisk prefab;
     private readonly Player player;
-    private Transform currentInstance;
+    private Obelisk currentInstance;
 
     public PlacingObelisk(Obelisk prefab, Player player)
     {
@@ -20,21 +20,20 @@ public class PlacingObelisk : IState
             return;
 
         var obeliskPosition = PlayerInput.Instance.MouseRayHitPoint;
-        var obeliskRotation = Quaternion.LookRotation(player.ColliderTracker.ClosestCollider.transform.forward, currentInstance.up);
-        currentInstance.position = obeliskPosition;
-        currentInstance.rotation = obeliskRotation;
+        var obeliskRotation = player.ColliderTracker.ClosestCollider.transform.forward;
+        currentInstance.UpdatePosition(obeliskPosition, obeliskRotation);
         
-        if (PlayerInput.Instance.PrimaryActionKeyDown)
+        if (PlayerInput.Instance.PrimaryActionKeyDown && currentInstance.HasCorrectCollision)
         {
-            currentInstance.SetParent(player.ColliderTracker.ClosestCollider.transform);
+            currentInstance.Activate(player.ColliderTracker.ClosestCollider);
             currentInstance = null;
             Finished = true;
         }
     }
-
+    
     public void OnEnter()
     {
-        currentInstance = Object.Instantiate(prefab, new Vector3(0,-100,0), Quaternion.identity).transform;
+        currentInstance = Object.Instantiate(prefab, new Vector3(0,-100,0), Quaternion.identity);
         Finished = false;
     }
 

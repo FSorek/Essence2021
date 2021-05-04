@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class PhysicsLayerStrategy : ISelectionStrategy
 {
@@ -12,6 +13,9 @@ public class PhysicsLayerStrategy : ISelectionStrategy
     }
     public Collider[] GetTargets()
     {
-        return Physics.OverlapCapsule(WorldSettings.ActivePointer.transform.position, PlayerInput.Instance.MouseRayHitPoint, rayRadius, layerMask);
+        var targets = Physics.OverlapCapsule(WorldSettings.ActivePointer.transform.position,
+            PlayerInput.Instance.MouseRayHitPoint, rayRadius, layerMask);
+        
+        return targets.OrderBy(c => Vector3.Distance(PlayerInput.Instance.MouseRayHitPoint, c.transform.position)).ToArray();
     }
 }

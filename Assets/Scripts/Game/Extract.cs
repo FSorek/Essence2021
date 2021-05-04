@@ -2,21 +2,21 @@
 
 public class Extract : IState
 {
-    private static float absorbTime = 2f;
-    public bool CanAbsorb => CheckCanAbsorb();
+    private static float extractTime = 2f;
+    public bool CanExtract => CheckCanExtract();
     public bool Finished { get; private set; }
     public Vector3 TargetPosition => cachedTarget.EssenceHolder.position;
 
     private readonly Player player;
-    private readonly MouseOverSelector obeliskSelector;
+    private readonly MouseOverSelector infusedObeliskSelector;
 
     private Obelisk cachedTarget;
     private float timer;
 
-    public Extract(Player player, MouseOverSelector obeliskSelector)
+    public Extract(Player player, MouseOverSelector infusedObeliskSelector)
     {
         this.player = player;
-        this.obeliskSelector = obeliskSelector;
+        this.infusedObeliskSelector = infusedObeliskSelector;
     }
 
     public void Tick()
@@ -27,22 +27,22 @@ public class Extract : IState
         Finished = true;
         var extractedEssence = cachedTarget.ExtractEssence();
         player.AddEssence(extractedEssence);
-        timer = absorbTime;
+        timer = extractTime;
     }
 
     public void OnEnter()
     {
         Finished = false;
-        timer = absorbTime;
+        timer = extractTime;
     }
 
     public void OnExit()
     {
     }
 
-    private bool CheckCanAbsorb()
+    private bool CheckCanExtract()
     {
-        var currentTarget = obeliskSelector.GetTarget(CanAbsorbOnTarget);
+        var currentTarget = infusedObeliskSelector.GetTarget();
         if (currentTarget == null)
             return false;
         cachedTarget = currentTarget.GetComponent<Obelisk>();
@@ -64,23 +64,23 @@ public class Extract : IState
     }
 }
 
-public class Exude : IState
+public class Infuse : IState
 {
-    private static float extractTime = 2f;
-    public bool CanExtract => CheckCanExtract();
+    private static float infusionTime = 2f;
+    public bool CanInfuse => CheckCanInfuse();
     public bool Finished { get; private set; }
     public Vector3 TargetPosition => cachedTarget.EssenceHolder.position;
 
     private readonly Player player;
-    private readonly MouseOverSelector obeliskSelector;
+    private readonly MouseOverSelector emptyObeliskSelector;
 
     private Obelisk cachedTarget;
     private float timer;
 
-    public Exude(Player player, MouseOverSelector obeliskSelector)
+    public Infuse(Player player, MouseOverSelector emptyObeliskSelector)
     {
         this.player = player;
-        this.obeliskSelector = obeliskSelector;
+        this.emptyObeliskSelector = emptyObeliskSelector;
     }
 
     public void Tick()
@@ -90,23 +90,23 @@ public class Exude : IState
             return;
         var extractedEssence = player.ExtractEssence();
         cachedTarget.AddEssence(extractedEssence);
-        timer = extractTime;
+        timer = infusionTime;
         Finished = true;
     }
 
     public void OnEnter()
     {
         Finished = false;
-        timer = extractTime;
+        timer = infusionTime;
     }
 
     public void OnExit()
     {
     }
 
-    private bool CheckCanExtract()
+    private bool CheckCanInfuse()
     {
-        var currentTarget = obeliskSelector.GetTarget(CanExtractToTarget);
+        var currentTarget = emptyObeliskSelector.GetTarget();
         if (currentTarget == null)
             return false;
         cachedTarget = currentTarget.GetComponent<Obelisk>();

@@ -52,7 +52,7 @@ public class PlayerVisuals : MonoBehaviour
         {
             extractVfx?.Play(extract.TargetPosition);
         }
-        else if (state is Exude exude)
+        else if (state is Infuse exude)
         {
             exudeVfx?.Play(exude.TargetPosition);
         }
@@ -76,7 +76,7 @@ public class PlayerVisuals : MonoBehaviour
         {
             extractVfx?.Stop();
         }
-        else if (state is Exude)
+        else if (state is Infuse)
         {
             exudeVfx?.Stop();
         }
